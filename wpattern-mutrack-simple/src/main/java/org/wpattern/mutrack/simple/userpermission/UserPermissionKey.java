@@ -41,4 +41,51 @@ public class UserPermissionKey extends BaseKey {
 		this.userId = userId;
 	}
 
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+
+		result = prime * result + ((this.permissionId == null) ? 0 : this.permissionId.hashCode());
+		result = prime * result + ((this.userId == null) ? 0 : this.userId.hashCode());
+
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!super.equals(obj)) {
+			return false;
+		}
+
+		if (this.getClass() != obj.getClass()) {
+			return false;
+		}
+
+		UserPermissionKey other = (UserPermissionKey) obj;
+
+		if (this.permissionId == null) {
+			if (other.permissionId != null) {
+				return false;
+			}
+		} else if (!this.permissionId.equals(other.permissionId)) {
+			return false;
+		}
+
+		if (this.userId == null) {
+			if (other.userId != null) {
+				return false;
+			}
+		} else if (!this.userId.equals(other.userId)) {
+			return false;
+		}
+
+		return true;
+	}
+
 }
