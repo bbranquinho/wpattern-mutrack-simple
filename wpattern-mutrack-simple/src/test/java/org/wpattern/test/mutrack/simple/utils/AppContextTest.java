@@ -8,6 +8,6 @@ import org.wpattern.mutrack.simple.utils.AppContext;
 @Configuration
 @Import(value = { AppContext.class })
 @ComponentScan(basePackages = { "org.wpattern.test.mutrack.simple" })
-public class AppContextTest {
+public abstract class AppContextTest {
 
 }

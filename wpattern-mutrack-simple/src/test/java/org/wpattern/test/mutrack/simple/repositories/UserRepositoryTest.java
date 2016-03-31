@@ -31,4 +31,13 @@ public class UserRepositoryTest {
 		}
 	}
 
+	@Test
+	public void find() {
+		List<UserEntity> users = this.userRepository.findByEmailOrName("", "");
+
+		if (LOGGER.isInfoEnabled()) {
+			LOGGER.info("Test FindAll(): " + users);
+		}
+	}
+
 }
