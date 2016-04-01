@@ -1,60 +1,57 @@
-<div class="container">
-  <button type="button" class="btn btn-default btn-lg btn-primary" ng-hide="showAddEditUser" ng-click="show()">
+<div>
+  <button type="button" ng-hide="showAddEditUser" ng-click="show()">
     New User
   </button>
 
-  <form class="form-horizontal" ng-submit="saveUser(user)" ng-hide="!showAddEditUser">
-    <div class="form-group">
+  <form ng-submit="saveUser(user)" ng-hide="!showAddEditUser">
+    <div>
       <label>Name</label>
-      <input type="text" class="form-control" placeholder="Name" ng-model="user.name" required>
+      <input type="text" placeholder="Name" ng-model="user.name" required>
     </div>
 
-    <div class="form-group">
+    <div>
       <label>Email</label>
-      <input type="email" class="form-control" placeholder="Email" ng-model="user.email" required>
+      <input type="email" placeholder="Email" ng-model="user.email" required>
     </div>
 
-    <div class="form-group">
+    <div>
       <label>Password</label>
-      <input type="password" class="form-control" placeholder="Password" ng-model="user.password" required>
+      <input type="password" placeholder="Password" ng-model="user.password" required>
     </div>
 
-    <div class="form-group">
+    <div>
       <label>Permissions</label>
-      <input type="checkbox" id="checkbox_id"><label for="checkbox_id">Text</label>
-      <input type="checkbox" id="checkbox_id2"><label for="checkbox_id">Text</label>
+      <input type="checkbox" id="chkNewAdm"><label for="chkNewAdm">Administrator</label>
+      <input type="checkbox" id="chkNewUser"><label for="chkNewUser">User</label>
     </div>
 
-    <button type="submit" class="btn btn-default btn-lg btn-primary">Save</button>
-    <button type="button" class="btn btn-default btn-lg btn-primary" ng-click="hide()">Cancel</button>
+    <button type="submit">Save</button>
+    <button type="button" ng-click="hide()">Cancel</button>
   </form>
 
-  <div class="panel panel-primary filterable">
-      <div class="panel-heading">
-          <br /><h3 class="panel-title">Users</h3>
-      </div>
-      <table class="table">
-          <thead>
-              <tr class="filters">
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Permissions</th>
-                  <th></th>
-                  <th></th>
-              </tr>
-          </thead>
-          <tbody>
-              <tr ng-repeat="user in users">
-                  <td>{{ user.name }}</td>
-                  <td>{{ user.email }}</td>
-                  <td>
-                    <input type="checkbox" ng-checked="false" disabled>Administrator<br>
-                    <input type="checkbox" ng-checked="true" disabled>User<br>
-                  </td>
-                  <td><button ng-click="editUser(user)">Edit</button></td>
-                  <td><button ng-click="deleteUser(user)">Delete</button></td>
-              </tr>
-          </tbody>
-      </table>
+  <div>
+    <br/><h3>Users</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Permissions</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="user in users">
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>
+            <div ng-repeat="permission in user.permissions">{{ permission.role | formatPermission}}</div>
+          </td>
+          <td><button ng-click="editUser(user)">Edit</button></td>
+          <td><button ng-click="deleteUser(user)">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
