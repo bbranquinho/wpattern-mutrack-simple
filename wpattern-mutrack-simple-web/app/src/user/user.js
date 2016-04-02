@@ -6,6 +6,11 @@ angular.module('mutrack')
     $scope.users = [];
     $scope.showAddEditUser = false;
 
+    $scope.permissions = [
+      {id: 1, role: 'ROLE_ADMIN'},
+      {id: 2, role: 'ROLE_USER'}
+    ];
+
     $scope.show = function() {
       $scope.showAddEditUser = true;
     };
@@ -32,10 +37,21 @@ angular.module('mutrack')
     };
 
     $scope.saveUser = function(user) {
-      UserSrv.save(user, function(newUser) {
-        $scope.users.push(newUser);
-        $scope.hide();
-      });
+      if (user.id) {
+        UserSrv.edit(user, function() {
+          for (var i = 0; i < $scope.users.length; i++) {
+            if ($scope.users[i].id === user.id) {
+              $scope.users[i] = user;
+            }
+          }
+          $scope.hide();
+        });
+      } else {
+        UserSrv.save(user, function(newUser) {
+          $scope.users.push(newUser);
+          $scope.hide();
+        });
+      }
     };
 
     UserSrv.find(function(data) {

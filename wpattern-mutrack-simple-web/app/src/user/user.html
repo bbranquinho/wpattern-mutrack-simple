@@ -21,8 +21,10 @@
 
     <div>
       <label>Permissions</label>
-      <input type="checkbox" id="chkNewAdm"><label for="chkNewAdm">Administrator</label>
-      <input type="checkbox" id="chkNewUser"><label for="chkNewUser">User</label>
+      <div ng-repeat="permission in permissions">
+        <input id="{{permission.role}}" type="checkbox" checklist-model="user.permissions" checklist-value="permission">
+        <label for="{{permission.role}}">{{permission.role | formatPermission}}</label>
+      </div>
     </div>
 
     <button type="submit">Save</button>

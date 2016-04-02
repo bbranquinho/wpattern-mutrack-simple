@@ -26,9 +26,14 @@ angular.module('mutrack')
       executeRequest($http, url, 'GET', {}, callback);
     };
 
-    // Save (New/Update) the data of an user.
-    userFactory.save = function(user, callback) {
+    // Save (add a new) the data of an user.
+    userFactory.add = function(user, callback) {
       executeRequest($http, url, 'POST', user, callback);
+    };
+
+    // Save (edit) the data of an user.
+    userFactory.edit = function(user, callback) {
+      executeRequest($http, url, 'PUT', user, callback);
     };
 
     // Delete an user.
