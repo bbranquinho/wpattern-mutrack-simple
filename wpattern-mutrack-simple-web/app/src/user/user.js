@@ -1,61 +1,66 @@
 'use strict';
 
 angular.module('mutrack')
-  .controller('UserCtrl', function($scope, UserSrv) {
+  .controller('UserCtrl', function($scope, RestSrv, SERVICE_PATH) {
     $scope.user = {};
     $scope.users = [];
+    $scope.permissions = [];
     $scope.showAddEditUser = false;
 
-    $scope.permissions = [
-      {id: 1, role: 'ROLE_ADMIN'},
-      {id: 2, role: 'ROLE_USER'}
-    ];
-
+    // Show the form used to edit or add users.
     $scope.show = function() {
       $scope.showAddEditUser = true;
     };
 
+    // Hide the form used to edit or add users.
     $scope.hide = function() {
       $scope.showAddEditUser = false;
       $scope.user = {};
     };
 
+    // Manage CRUD operations.
+    var userUrl = SERVICE_PATH.PRIVATE_PATH + '/user';
+
     $scope.editUser = function(user) {
-      $scope.user = {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        permissions: user.permissions
-      };
+      $scope.user = angular.copy(user);
       $scope.show();
     };
 
     $scope.deleteUser = function(user) {
-      UserSrv.delete(user, function() {
+      RestSrv.delete(userUrl, user, function() {
         $scope.users.splice($scope.users.indexOf(user), 1);
       });
     };
 
     $scope.saveUser = function(user) {
       if (user.id) {
-        UserSrv.edit(user, function() {
+        RestSrv.edit(userUrl, user, function() {
           for (var i = 0; i < $scope.users.length; i++) {
             if ($scope.users[i].id === user.id) {
               $scope.users[i] = user;
             }
           }
+
+          delete user.password;
           $scope.hide();
         });
       } else {
-        UserSrv.save(user, function(newUser) {
+        RestSrv.add(userUrl, user, function(newUser) {
           $scope.users.push(newUser);
           $scope.hide();
         });
       }
     };
 
-    UserSrv.find(function(data) {
-      $scope.users = data;
+    // Request all data (permission and user).
+    var permissionUrl = SERVICE_PATH.PRIVATE_PATH + '/permission';
+
+    RestSrv.find(permissionUrl, function(data) {
+      $scope.permissions = data;
+
+      RestSrv.find(userUrl, function(data) {
+        $scope.users = data;
+      });
     });
 
   });
