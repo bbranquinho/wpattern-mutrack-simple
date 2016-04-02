@@ -2,7 +2,7 @@
 
 var BASE_URL = 'http://localhost:8080/api';
 
-angular.module('mutrack', ['ngRoute', 'checklist-model'])
+angular.module('mutrack', ['checklist-model', 'ngNotify', 'ngRoute'])
   .constant('SERVICE_PATH', {
     'ROOT_PATH': BASE_URL,
     'PUBLIC_PATH': BASE_URL + '/public',

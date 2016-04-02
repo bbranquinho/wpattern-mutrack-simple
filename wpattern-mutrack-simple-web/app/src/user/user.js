@@ -1,11 +1,15 @@
 'use strict';
 
 angular.module('mutrack')
-  .controller('UserCtrl', function($scope, RestSrv, SERVICE_PATH) {
+  .controller('UserCtrl', function($scope, ngNotify, RestSrv, SERVICE_PATH) {
     $scope.user = {};
     $scope.users = [];
     $scope.permissions = [];
     $scope.showAddEditUser = false;
+
+    ngNotify.config({
+      theme: 'pastel'
+    });
 
     // Show the form used to edit or add users.
     $scope.show = function() {
@@ -29,6 +33,7 @@ angular.module('mutrack')
     $scope.deleteUser = function(user) {
       RestSrv.delete(userUrl, user, function() {
         $scope.users.splice($scope.users.indexOf(user), 1);
+        ngNotify.set('User \'' + user.name + '\' deleted.', 'success');
       });
     };
 
@@ -43,11 +48,13 @@ angular.module('mutrack')
 
           delete user.password;
           $scope.hide();
+          ngNotify.set('User \'' + user.name + '\' updated.', 'success');
         });
       } else {
         RestSrv.add(userUrl, user, function(newUser) {
           $scope.users.push(newUser);
           $scope.hide();
+          ngNotify.set('User \'' + user.name + '\' added.', 'success');
         });
       }
     };
@@ -60,6 +67,7 @@ angular.module('mutrack')
 
       RestSrv.find(userUrl, function(data) {
         $scope.users = data;
+        ngNotify.set('Users loaded with succeess.', 'success');
       });
     });
 

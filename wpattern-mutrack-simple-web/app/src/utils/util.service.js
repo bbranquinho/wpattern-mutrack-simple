@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mutrack')
-  .service('HttpRequestSrv', function($http) {
+  .service('HttpRequestSrv', function($http, ngNotify) {
     return function(url, method, data, callback) {
       var requestParams = {
         method: method,
@@ -15,6 +15,7 @@ angular.module('mutrack')
           callback && callback(response.data);
         },
         function errorCallback(response) {
+          ngNotify.set('Error: ' + response.statusText + '.', 'error');
         });
     };
   })
@@ -38,7 +39,7 @@ angular.module('mutrack')
 
     // Delete a data.
     restFactory.delete = function(url, data, callback) {
-      executeRequest(url, 'DELETE', data, callback);
+      HttpRequestSrv(url, 'DELETE', data, callback);
     };
 
     return restFactory;
