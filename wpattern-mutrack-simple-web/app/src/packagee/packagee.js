@@ -32,7 +32,7 @@ angular.module('mutrack')
     $scope.deletePackagee = function(packagee) {
       RestSrv.delete(packageeUrl, packagee, function() {
         $scope.packagees.splice($scope.packagees.indexOf(packagee), 1);
-        ngNotify.set('Packagee \'' + packagee.name + '\' deleted.', 'success');
+        ngNotify.set('Package \'' + packagee.name + '\' deleted.', 'success');
       });
     };
 
@@ -46,13 +46,13 @@ angular.module('mutrack')
           }
 
           $scope.hide();
-          ngNotify.set('Packagee \'' + packagee.name + '\' updated.', 'success');
+          ngNotify.set('Package \'' + packagee.name + '\' updated.', 'success');
         });
       } else {
         RestSrv.add(packageeUrl, packagee, function(newPackagee) {
           $scope.packagees.push(newPackagee);
           $scope.hide();
-          ngNotify.set('Packagee \'' + packagee.name + '\' added.', 'success');
+          ngNotify.set('Package \'' + packagee.name + '\' added.', 'success');
         });
       }
     };
@@ -60,7 +60,7 @@ angular.module('mutrack')
     // Request all data (packagees).
     RestSrv.find(packageeUrl, function(data) {
       $scope.packagees = data;
-      ngNotify.set('Packagees loaded with succeess.', 'success');
+      ngNotify.set('Loaded packages with success.', 'success');
     });
 
   });

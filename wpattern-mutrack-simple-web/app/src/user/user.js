@@ -68,7 +68,7 @@ angular.module('mutrack')
 
       RestSrv.find(userUrl, function(data) {
         $scope.users = data;
-        ngNotify.set('Users loaded with succeess.', 'success');
+        ngNotify.set('Loaded users with success.', 'success');
       });
     });
 
