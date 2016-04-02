@@ -14,9 +14,9 @@ angular.module('mutrack', ['checklist-model', 'ngNotify', 'ngRoute'])
         templateUrl: 'src/home/home.html',
         controller: 'HomeCtrl'
       }).
-      when('/package', {
-        templateUrl: 'src/package/package.html',
-        controller: 'PackageCtrl'
+      when('/packagee', {
+        templateUrl: 'src/packagee/packagee.html',
+        controller: 'PackageeCtrl'
       }).
       when('/user', {
         templateUrl: 'src/user/user.html',

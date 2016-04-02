@@ -40,13 +40,14 @@ angular.module('mutrack')
     $scope.saveUser = function(user) {
       if (user.id) {
         RestSrv.edit(userUrl, user, function() {
+          delete user.password;
+
           for (var i = 0; i < $scope.users.length; i++) {
             if ($scope.users[i].id === user.id) {
               $scope.users[i] = user;
             }
           }
 
-          delete user.password;
           $scope.hide();
           ngNotify.set('User \'' + user.name + '\' updated.', 'success');
         });

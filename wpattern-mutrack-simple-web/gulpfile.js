@@ -26,8 +26,20 @@ gulp.task('html', function () {
     .pipe(connect.reload());
 });
 
+gulp.task('js', function () {
+  gulp.src('./app/**/*.js')
+    .pipe(connect.reload());
+});
+
+gulp.task('css', function () {
+  gulp.src('./app/**/*.css')
+    .pipe(connect.reload());
+});
+
 gulp.task('watch', function () {
   gulp.watch(['./app/**/*.html'], ['html']);
+  gulp.watch(['./app/**/*.js'], ['js']);
+  gulp.watch(['./app/**/*.css'], ['css']);
 });
 
 gulp.task('default', ['connect', 'watch', 'index']);

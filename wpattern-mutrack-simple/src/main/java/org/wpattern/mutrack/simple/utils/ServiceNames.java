@@ -18,7 +18,7 @@ public final class ServiceNames {
 	// PRIVATE PATHS
 	///////////////////////////////////////////////////////////////
 
-	public static final String PACKAGE_PATH = PRIVATE_ROOT_PATH + "/package";
+	public static final String PACKAGEE_PATH = PRIVATE_ROOT_PATH + "/packagee";
 
 	public static final String PERMISSION_PATH = PRIVATE_ROOT_PATH + "/permission";
 

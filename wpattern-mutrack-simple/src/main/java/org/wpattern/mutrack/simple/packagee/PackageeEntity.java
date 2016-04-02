@@ -17,7 +17,7 @@ import org.wpattern.mutrack.simple.utils.BaseEntity;
 @Entity
 @Table(name = "tb_package")
 @AttributeOverride(name = "id", column = @Column(name = "pk_id"))
-public class PackageEntity extends BaseEntity<Long> {
+public class PackageeEntity extends BaseEntity<Long> {
 
 	private static final long serialVersionUID = 201505091506L;
 
@@ -38,10 +38,10 @@ public class PackageEntity extends BaseEntity<Long> {
 	@JoinColumn(name = "owner_id")
 	private UserEntity user;
 
-	public PackageEntity() {
+	public PackageeEntity() {
 	}
 
-	public PackageEntity(String name, String code, String description, Date registerDate, UserEntity user) {
+	public PackageeEntity(String name, String code, String description, Date registerDate, UserEntity user) {
 		this.name = name;
 		this.code = code;
 		this.description = description;
