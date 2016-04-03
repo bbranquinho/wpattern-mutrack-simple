@@ -13,16 +13,20 @@ angular.module('mutrack', ['checklist-model', 'ngNotify', 'ngRoute'])
       when('/', {
         templateUrl: 'src/home/home.html',
         controller: 'HomeCtrl'
-      }).
-      when('/packagee', {
+      })
+      .when('/login', {
+        templateUrl: 'src/login/login.html',
+        controller: 'LoginCtrl'
+      })
+      .when('/packagee', {
         templateUrl: 'src/packagee/packagee.html',
         controller: 'PackageeCtrl'
-      }).
-      when('/user', {
+      })
+      .when('/user', {
         templateUrl: 'src/user/user.html',
         controller: 'UserCtrl'
-      }).
-      otherwise({
+      })
+      .otherwise({
         redirectTo: '/'
       });
   });
