@@ -9,17 +9,25 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.wpattern.mutrack.simple.permission.PermissionEntity;
 import org.wpattern.mutrack.simple.user.UserEntity;
 import org.wpattern.mutrack.simple.user.UserRepository;
 
+@Service
 @Component
 public class UserDetailService implements UserDetailsService {
 
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
+	@Transactional
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		UserEntity userDetails = userRepository.findByEmail(username);
