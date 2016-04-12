@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
 
@@ -25,42 +27,56 @@ namespace MutrackSimple.Models.Utils
         #region Methods (GenericRepository)
         public void Add(T entity)
         {
-            throw new NotImplementedException();
+            Set.Add(entity);
+            SaveChanges();
         }
 
         public T Delete(PK pk)
         {
-            throw new NotImplementedException();
+            var entity = Single(pk);
+
+            if (entity != null)
+            {
+                Set.Remove(entity);
+                SaveChanges();
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
+
+            return entity;
         }
 
         public void Delete(T entity)
         {
-            throw new NotImplementedException();
+            Set.Remove(entity);
+            SaveChanges();
         }
 
         public IEnumerable<T> Find(Func<T, bool> where)
         {
-            throw new NotImplementedException();
+            return Set.Where(where);
         }
 
         public T First()
         {
-            throw new NotImplementedException();
+            return Set.First();
         }
 
         public T First(Func<T, bool> where)
         {
-            throw new NotImplementedException();
+            return Set.First(where);
         }
 
         public T FirstOrDefault(Func<T, bool> where)
         {
-            throw new NotImplementedException();
+            return Set.FirstOrDefault<T>(where);
         }
 
         public IEnumerable<T> GetAll()
         {
-            throw new NotImplementedException();
+            return Set.AsEnumerable();
         }
 
         public IQueryable<T> GetQuery()
@@ -70,17 +86,48 @@ namespace MutrackSimple.Models.Utils
 
         public void SaveChanges()
         {
-            throw new NotImplementedException();
+            Context.SaveChanges();
         }
 
         public T Single(Func<T, bool> where)
         {
-            throw new NotImplementedException();
+            return Set.Single(where);
         }
 
-        public void Update(T entity)
+        public T Single(PK pk)
         {
-            throw new NotImplementedException();
+            return Set.Find(pk);
+        }
+
+        public void Update(T newEntity)
+        {
+            var entityEntry = Context.Entry(newEntity);
+
+            if ((entityEntry.State != EntityState.Modified) && Exists(newEntity))
+            {
+                Set.Attach(newEntity);
+                entityEntry.State = EntityState.Modified;
+            }
+
+            SaveChanges();
+        }
+        #endregion
+
+        #region Protected Methods
+        protected Boolean Exists(T entity)
+        {
+            var objectContext = ((IObjectContextAdapter)Context).ObjectContext;
+            var objectSet = objectContext.CreateObjectSet<T>();
+            var entityKey = objectContext.CreateEntityKey(objectSet.EntitySet.Name, entity);
+            Object foundEntity;
+            var exists = objectContext.TryGetObjectByKey(entityKey, out foundEntity);
+
+            if (exists)
+            {
+                objectContext.Detach(foundEntity);
+            }
+
+            return exists;
         }
         #endregion
     }

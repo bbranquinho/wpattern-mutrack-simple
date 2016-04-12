@@ -10,6 +10,7 @@ namespace MutrackSimple.Models.Utils
         IQueryable<T> GetQuery();
         IEnumerable<T> GetAll();
         IEnumerable<T> Find(Func<T, bool> where);
+        T Single(PK pk);
         T Single(Func<T, bool> where);
         T First();
         T First(Func<T, bool> where);
