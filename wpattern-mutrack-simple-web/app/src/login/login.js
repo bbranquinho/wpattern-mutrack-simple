@@ -35,7 +35,10 @@ angular.module('mutrack')
               permissions: []
             };
 
-            ngNotify.set('The email or password that you have entered do not match our records.', 'failure');
+            ngNotify.set('The email or password that you have entered do not match our records.', {
+              type: 'failure',
+              duration: 5000
+            });
           }
         },
         function failure(response) {
