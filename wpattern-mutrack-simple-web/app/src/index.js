@@ -29,4 +29,11 @@ angular.module('mutrack', ['checklist-model', 'ngNotify', 'ngRoute'])
       .otherwise({
         redirectTo: '/'
       });
+  }).
+  run(function($rootScope) {
+    $rootScope.authDetails = {
+      name: '',
+      authenticated: false,
+      permissions: []
+    }
   });

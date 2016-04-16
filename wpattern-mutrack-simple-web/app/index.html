@@ -26,14 +26,7 @@
 			<header ng-include="'src/main/header.html'" id="header"></header>
 
 		  <!-- Menu -->
-			<section id="menu">
-				<!-- Actions -->
-				<section>
-					<ul class="actions vertical">
-						<li><a href="#/login" class="button big fit">Log In</a></li>
-					</ul>
-				</section>
-
+			<section id="menu" ng-controller="headerSrv">
 				<!-- Links -->
 				<section ng-include="'src/main/menu.html'"></section>
 			</section>
@@ -67,6 +60,7 @@
 	  <script src="src/index.js"></script>
 	  <script src="src/home/home.js"></script>
 	  <script src="src/login/login.js"></script>
+	  <script src="src/main/header.js"></script>
 	  <script src="src/main/main.js"></script>
 	  <script src="src/packagee/packagee.js"></script>
 	  <script src="src/user/user.js"></script>
