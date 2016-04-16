@@ -29,7 +29,6 @@ angular.module('mutrack', ['checklist-model', 'ngNotify', 'ngRoute'])
       .otherwise({
         redirectTo: '/'
       });
-<<<<<<< HEAD
   }).
   run(function($rootScope) {
     $rootScope.authDetails = {
@@ -37,9 +36,4 @@ angular.module('mutrack', ['checklist-model', 'ngNotify', 'ngRoute'])
       authenticated: false,
       permissions: []
     }
-=======
-  })
-  .config(function($httpProvider) {
-    $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
->>>>>>> af5b68a6356c4f1c476a7f5e42995834030c0425
   });

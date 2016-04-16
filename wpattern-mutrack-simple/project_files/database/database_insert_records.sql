@@ -1,7 +1,7 @@
 -- Password: "admin".
-INSERT INTO `mutrack_simple`.`tb_user` (`pk_id`, `name`, `email`, `password`) VALUES ('1', 'admin', 'admin@admin.com', '$2a$10$Dqm7/mMwCE6xkrHjp/fU8eThnTTGf/cMquAZG2xq/HXuN2gGwzT7y');
+INSERT INTO `mutrack_simple`.`tb_user` (`pk_id`, `name`, `email`, `password`) VALUES ('1', 'Admin', 'admin@admin.com', 'admin');
 -- Password: "user".
-INSERT INTO `mutrack_simple`.`tb_user` (`pk_id`, `name`, `email`, `password`) VALUES ('2', 'user', 'user@user.com', '$2a$10$ODVok0lPgmhjQeqwQX484ODMfDTNbbdq5PV0Mj9AlRLikemd0bMdq');
+INSERT INTO `mutrack_simple`.`tb_user` (`pk_id`, `name`, `email`, `password`) VALUES ('2', 'User', 'user@user.com', 'user');
 
 INSERT INTO `mutrack_simple`.`tb_package` (`pk_id`, `name`, `code`, `description`, `register_date`, `owner_id`) VALUES ('1', 'Sensor de Temperatura', 'RE736868622SE', 'Compra realizada na Aliexpress.', '2015-05-28', '1');
 INSERT INTO `mutrack_simple`.`tb_package` (`pk_id`, `name`, `code`, `description`, `register_date`, `owner_id`) VALUES ('2', 'Livro Angularjs', 'DM567434841BR', 'Enviada pela submarino.', '2015-05-21', '2');
