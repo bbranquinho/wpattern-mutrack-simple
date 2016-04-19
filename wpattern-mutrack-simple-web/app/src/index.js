@@ -31,5 +31,6 @@ angular.module('mutrack', ['checklist-model', 'ngNotify', 'ngRoute'])
       });
   })
   .config(function($httpProvider) {
-    $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    //$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
   });

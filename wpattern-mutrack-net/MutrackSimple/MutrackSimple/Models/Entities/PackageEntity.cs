@@ -6,7 +6,7 @@ using System.Web;
 
 namespace MutrackSimple.Models
 {
-    public partial class PackageEntity : BaseEntity<Int32>
+    public partial class PackageEntity : BaseEntity<int>
     {
     }
 }

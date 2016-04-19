@@ -9,20 +9,28 @@ angular.module('mutrack')
     });
 
     $scope.login = function(email, password) {
-      var headers = {
-        authorization : "Basic " + btoa(email + ":" + password)
+      var requestParams = {
+        method: 'POST',
+        url: url,
+        headers: { 'Content-Type': 'application/json' },
+        data: {
+          'email': email,
+          'password': password
+        }
       };
 
-  		$http.get('http://localhost:8080/user', {
-  			headers : headers
-  		}).success(function(data) {
-        $rootScope.auth = {
-          authenticated: data.name || false,
-          permissions: data.permissions
-        };
-  		}).error(function(error) {
-  			$rootScope.authenticated = false;
-  		});
+      $http(requestParams).then(
+        function successCallback(response) {
+          var data = response.data;
+
+          $rootScope.auth = {
+            authenticated: true
+          };
+
+        },
+        function errorCallback(response) {
+          ngNotify.set('Error: ' + response.statusText + '.', 'error');
+        });
     };
 
   });

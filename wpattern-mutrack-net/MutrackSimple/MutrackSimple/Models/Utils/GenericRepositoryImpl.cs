@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
+using System.Web.Http.Cors;
 
 namespace MutrackSimple.Models.Utils
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public abstract class GenericRepositoryImpl<T, PK> : GenericRepository<T, PK> where T : BaseEntity<PK>
     {
         #region Properties
@@ -25,42 +29,56 @@ namespace MutrackSimple.Models.Utils
         #region Methods (GenericRepository)
         public void Add(T entity)
         {
-            throw new NotImplementedException();
+            Set.Add(entity);
+            SaveChanges();
         }
 
         public T Delete(PK pk)
         {
-            throw new NotImplementedException();
+            var entity = Single(pk);
+
+            if (entity != null)
+            {
+                Set.Remove(entity);
+                SaveChanges();
+            }
+            else
+            {
+                //Log.Error("Entity not founded to be deleted {0}.", pk);
+            }
+
+            return entity;
         }
 
         public void Delete(T entity)
         {
-            throw new NotImplementedException();
+            Set.Remove(entity);
+            SaveChanges();
         }
 
         public IEnumerable<T> Find(Func<T, bool> where)
         {
-            throw new NotImplementedException();
+            return Set.Where(where);
         }
 
         public T First()
         {
-            throw new NotImplementedException();
+            return Set.First();
         }
 
         public T First(Func<T, bool> where)
         {
-            throw new NotImplementedException();
+            return Set.First(where);
         }
 
         public T FirstOrDefault(Func<T, bool> where)
         {
-            throw new NotImplementedException();
+            return Set.FirstOrDefault<T>(where);
         }
 
         public IEnumerable<T> GetAll()
         {
-            throw new NotImplementedException();
+            return Set.AsEnumerable();
         }
 
         public IQueryable<T> GetQuery()
@@ -68,19 +86,50 @@ namespace MutrackSimple.Models.Utils
             return Set.AsQueryable();
         }
 
-        public void SaveChanges()
+        public int SaveChanges()
         {
-            throw new NotImplementedException();
+            return Context.SaveChanges();
+        }
+
+        public T Single(PK pk)
+        {
+            return Set.Find(pk);
         }
 
         public T Single(Func<T, bool> where)
         {
-            throw new NotImplementedException();
+            return Set.Single(where);
         }
 
         public void Update(T entity)
         {
-            throw new NotImplementedException();
+            var entityEntry = Context.Entry(entity);
+
+            if ((entityEntry.State != EntityState.Modified) && Exists(entity))
+            {
+                Set.Attach(entity);
+                entityEntry.State = EntityState.Modified;
+            }
+
+            SaveChanges();
+        }
+        #endregion
+
+        #region Protected Methods
+        protected Boolean Exists(T entity)
+        {
+            var objectContext = ((IObjectContextAdapter)Context).ObjectContext;
+            var objectSet = objectContext.CreateObjectSet<T>();
+            var entityKey = objectContext.CreateEntityKey(objectSet.EntitySet.Name, entity);
+            Object foundEntity;
+            var exists = objectContext.TryGetObjectByKey(entityKey, out foundEntity);
+
+            if (exists)
+            {
+                objectContext.Detach(foundEntity);
+            }
+
+            return exists;
         }
         #endregion
     }

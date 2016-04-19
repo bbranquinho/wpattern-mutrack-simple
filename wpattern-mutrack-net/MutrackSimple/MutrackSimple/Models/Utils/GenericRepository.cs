@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Http.Cors;
 
 namespace MutrackSimple.Models.Utils
 {
@@ -10,6 +11,7 @@ namespace MutrackSimple.Models.Utils
         IQueryable<T> GetQuery();
         IEnumerable<T> GetAll();
         IEnumerable<T> Find(Func<T, bool> where);
+        T Single(PK pk);
         T Single(Func<T, bool> where);
         T First();
         T First(Func<T, bool> where);
@@ -18,6 +20,6 @@ namespace MutrackSimple.Models.Utils
         void Delete(T entity);
         T Delete(PK pk);
         void Update(T entity);
-        void SaveChanges();
+        int SaveChanges();
     }
 }

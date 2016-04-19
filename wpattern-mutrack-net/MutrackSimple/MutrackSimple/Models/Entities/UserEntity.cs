@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MutrackSimple.Models.Entities
+namespace MutrackSimple.Models
 {
-    public partial class UserEntity : BaseEntity<Int32>
+    public partial class UserEntity : BaseEntity<int>
     {
     }
 }
