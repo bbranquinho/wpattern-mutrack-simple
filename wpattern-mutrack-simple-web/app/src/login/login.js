@@ -1,12 +1,8 @@
 'use strict';
 
 angular.module('mutrack')
-  .controller('LoginCtrl', function($scope, $rootScope, $http, ngNotify, RestSrv, SERVICE_PATH) {
+  .controller('LoginCtrl', function($scope, $http, $rootScope, $location, ngNotify, SERVICE_PATH) {
     var url = SERVICE_PATH.PUBLIC_PATH + '/auth';
-
-    ngNotify.config({
-      theme: 'pastel'
-    });
 
     $scope.login = function(email, password) {
       var requestParams = {
@@ -20,17 +16,38 @@ angular.module('mutrack')
       };
 
       $http(requestParams).then(
-        function successCallback(response) {
+        function success(response) {
           var data = response.data;
 
-          $rootScope.auth = {
-            authenticated: true
-          };
+          if (data.name) {
+            $rootScope.authDetails = {
+              name: data.name,
+              authenticated: true,
+              permissions: data.permissions
+            };
 
+            $location.path('/');
+            ngNotify.set('Welcome ' + data.name + '.', 'success');
+          } else {
+            $rootScope.authDetails = {
+              name: '',
+              authenticated: false,
+              permissions: []
+            };
+
+            ngNotify.set('The email or password that you have entered do not match our records.', {
+              type: 'failure',
+              duration: 5000
+            });
+          }
         },
-        function errorCallback(response) {
-          ngNotify.set('Error: ' + response.statusText + '.', 'error');
-        });
+        function failure(response) {
+          $rootScope.authDetails = {
+            name: '',
+            authenticated: false,
+            permissions: []
+          };
+        }
+      );
     };
-
   });

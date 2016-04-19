@@ -1,11 +1,18 @@
+<section>
+  <ul class="actions vertical">
+    <li ng-show="!authDetails.authenticated"><a href="#/login" class="button big fit">Login</a></li>
+    <li ng-show="authDetails.authenticated"><a ng-click="logout()" href="#/" class="button big fit">Logout</a></li>
+  </ul>
+</section>
+
 <ul class="links">
-  <li>
+  <li ng-show="hasAnyPermission(['ROLE_ADMIN', 'ROLE_USER'])">
     <a href="#/packagee">
       <h3>Packages</h3>
       <p>List of packages.</p>
     </a>
   </li>
-  <li>
+  <li ng-show="hasAnyPermission(['ROLE_ADMIN'])">
     <a href="#/user">
       <h3>Users</h3>
       <p>Users of the system.</p>

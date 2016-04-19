@@ -45,6 +45,7 @@ namespace MutrackSimple.Models.Utils
             else
             {
                 //Log.Error("Entity not founded to be deleted {0}.", pk);
+                throw new NotImplementedException();
             }
 
             return entity;
@@ -94,6 +95,7 @@ namespace MutrackSimple.Models.Utils
         public T Single(PK pk)
         {
             return Set.Find(pk);
+            Context.SaveChanges();
         }
 
         public T Single(Func<T, bool> where)
@@ -101,13 +103,13 @@ namespace MutrackSimple.Models.Utils
             return Set.Single(where);
         }
 
-        public void Update(T entity)
+        public void Update(T newEntity)
         {
-            var entityEntry = Context.Entry(entity);
+            var entityEntry = Context.Entry(newEntity);
 
-            if ((entityEntry.State != EntityState.Modified) && Exists(entity))
+            if ((entityEntry.State != EntityState.Modified) && Exists(newEntity))
             {
-                Set.Attach(entity);
+                Set.Attach(newEntity);
                 entityEntry.State = EntityState.Modified;
             }
 
