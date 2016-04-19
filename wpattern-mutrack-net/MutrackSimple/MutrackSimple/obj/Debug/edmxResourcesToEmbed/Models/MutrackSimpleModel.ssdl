@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Models.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tb_package">
+    <Key>
+      <PropertyRef Name="pk_id" />
+    </Key>
+    <Property Name="pk_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="code" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="description" Type="varchar" MaxLength="150" />
+    <Property Name="register_date" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="owner_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tb_permission">
+    <Key>
+      <PropertyRef Name="pk_id" />
+    </Key>
+    <Property Name="pk_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="role" Type="varchar" MaxLength="45" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tb_user">
+    <Key>
+      <PropertyRef Name="pk_id" />
+    </Key>
+    <Property Name="pk_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="120" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tb_user_permission">
+    <Key>
+      <PropertyRef Name="permission_id" />
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="permission_id" Type="int" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="fk_tb_package_tb_user">
+    <End Role="tb_user" Type="Self.tb_user" Multiplicity="1" />
+    <End Role="tb_package" Type="Self.tb_package" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_user">
+        <PropertyRef Name="pk_id" />
+      </Principal>
+      <Dependent Role="tb_package">
+        <PropertyRef Name="owner_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_tb_permission_has_tb_user_tb_permission1">
+    <End Role="tb_permission" Type="Self.tb_permission" Multiplicity="1" />
+    <End Role="tb_user_permission" Type="Self.tb_user_permission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_permission">
+        <PropertyRef Name="pk_id" />
+      </Principal>
+      <Dependent Role="tb_user_permission">
+        <PropertyRef Name="permission_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_tb_permission_has_tb_user_tb_user1">
+    <End Role="tb_user" Type="Self.tb_user" Multiplicity="1" />
+    <End Role="tb_user_permission" Type="Self.tb_user_permission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_user">
+        <PropertyRef Name="pk_id" />
+      </Principal>
+      <Dependent Role="tb_user_permission">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelsStoreContainer">
+    <EntitySet Name="tb_package" EntityType="Self.tb_package" Schema="mutrack_simple" store:Type="Tables" />
+    <EntitySet Name="tb_permission" EntityType="Self.tb_permission" Schema="mutrack_simple" store:Type="Tables" />
+    <EntitySet Name="tb_user" EntityType="Self.tb_user" Schema="mutrack_simple" store:Type="Tables" />
+    <EntitySet Name="tb_user_permission" EntityType="Self.tb_user_permission" Schema="mutrack_simple" store:Type="Tables" />
+    <AssociationSet Name="fk_tb_package_tb_user" Association="Self.fk_tb_package_tb_user">
+      <End Role="tb_user" EntitySet="tb_user" />
+      <End Role="tb_package" EntitySet="tb_package" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tb_permission_has_tb_user_tb_permission1" Association="Self.fk_tb_permission_has_tb_user_tb_permission1">
+      <End Role="tb_permission" EntitySet="tb_permission" />
+      <End Role="tb_user_permission" EntitySet="tb_user_permission" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tb_permission_has_tb_user_tb_user1" Association="Self.fk_tb_permission_has_tb_user_tb_user1">
+      <End Role="tb_user" EntitySet="tb_user" />
+      <End Role="tb_user_permission" EntitySet="tb_user_permission" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

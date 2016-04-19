@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<nlog xmlns="http://www.nlog-project.org/schemas/NLog.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      autoReload="true" throwExceptions="false">
+
+  <variable name="appName" value="MutrackSimple" />
+
+  <targets async="false">
+    <target xsi:type="File" name="default"
+            layout="${longdate} [${threadid}] ${level} ${logger}: ${message} ${exception:format=tostring}"
+            fileName="logs/wpattern-mutrack-simple-${shortdate}.log" keepFileOpen="false"
+            archiveEvery="Day" maxArchiveFiles="30" />
+
+    <target xsi:type="EventLog" name="eventlog" source="${appName}" layout="${message}${newline}${exception:format=ToString}"/>
+  </targets>
+
+  <rules>
+    <logger name="*" writeTo="default" minlevel="Info" />
+    <logger name="*" writeTo="eventlog" minlevel="Info" />
+  </rules>
+</nlog>

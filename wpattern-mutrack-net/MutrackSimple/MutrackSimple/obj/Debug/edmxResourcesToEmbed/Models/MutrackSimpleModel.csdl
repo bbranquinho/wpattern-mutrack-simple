@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="PackageEntity">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="RegisterDate" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OwnerId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.fk_tb_package_tb_user" FromRole="tb_package" ToRole="tb_user" />
+  </EntityType>
+  <EntityType Name="PermissionEntity">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Role" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="Self.tb_user_permission" FromRole="tb_permission" ToRole="tb_user" />
+  </EntityType>
+  <EntityType Name="UserEntity">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="120" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Packages" Relationship="Self.fk_tb_package_tb_user" FromRole="tb_user" ToRole="tb_package" />
+    <NavigationProperty Name="Permissions" Relationship="Self.tb_user_permission" FromRole="tb_user" ToRole="tb_permission" />
+  </EntityType>
+  <Association Name="fk_tb_package_tb_user">
+    <End Role="tb_user" Type="Models.UserEntity" Multiplicity="1" />
+    <End Role="tb_package" Type="Models.PackageEntity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_user">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tb_package">
+        <PropertyRef Name="OwnerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tb_user_permission">
+    <End Role="tb_permission" Type="Models.PermissionEntity" Multiplicity="*" />
+    <End Role="tb_user" Type="Models.UserEntity" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="MutrackSimpleEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Packages" EntityType="Models.PackageEntity" />
+    <EntitySet Name="Permissions" EntityType="Models.PermissionEntity" />
+    <EntitySet Name="Users" EntityType="Models.UserEntity" />
+    <AssociationSet Name="fk_tb_package_tb_user" Association="Self.fk_tb_package_tb_user">
+      <End Role="tb_user" EntitySet="Users" />
+      <End Role="tb_package" EntitySet="Packages" />
+    </AssociationSet>
+    <AssociationSet Name="tb_user_permission" Association="Self.tb_user_permission">
+      <End Role="tb_permission" EntitySet="Permissions" />
+      <End Role="tb_user" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
