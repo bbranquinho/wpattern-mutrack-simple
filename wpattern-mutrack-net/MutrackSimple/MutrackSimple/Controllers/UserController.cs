@@ -27,7 +27,9 @@ namespace MutrackSimple.Controllers
         #region Service Methods
         public List<UserEntity> Get()
         {
-            return Repository.GetAll().ToList();
+            var users = Repository.GetAll().ToList();
+
+            return users;
         }
         #endregion
     }

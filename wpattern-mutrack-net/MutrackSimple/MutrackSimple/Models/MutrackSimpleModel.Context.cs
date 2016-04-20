@@ -18,6 +18,7 @@ namespace MutrackSimple.Models
         public MutrackSimpleEntities()
             : base("name=MutrackSimpleEntities")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
