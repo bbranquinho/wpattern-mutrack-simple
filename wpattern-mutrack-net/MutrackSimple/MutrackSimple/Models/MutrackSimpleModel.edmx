@@ -4,33 +4,33 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Models.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="MutrackSimpleModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tb_package">
           <Key>
             <PropertyRef Name="pk_id" />
           </Key>
-          <Property Name="pk_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="varchar" MaxLength="60" Nullable="false" />
-          <Property Name="code" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="description" Type="varchar" MaxLength="150" />
-          <Property Name="register_date" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="owner_id" Type="int" Nullable="false" />
+          <Property Name="pk_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="60" Nullable="false" />
+          <Property Name="code" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="description" Type="nchar" MaxLength="10" />
+          <Property Name="register_date" Type="datetime" Nullable="false" />
+          <Property Name="ower_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_permission">
           <Key>
             <PropertyRef Name="pk_id" />
           </Key>
-          <Property Name="pk_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="role" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="pk_id" Type="int" Nullable="false" />
+          <Property Name="role" Type="nchar" MaxLength="45" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_user">
           <Key>
             <PropertyRef Name="pk_id" />
           </Key>
-          <Property Name="pk_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="varchar" MaxLength="120" Nullable="false" />
-          <Property Name="email" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="password" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="pk_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="120" Nullable="false" />
+          <Property Name="email" Type="nchar" MaxLength="255" Nullable="false" />
+          <Property Name="password" Type="nchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_user_permission">
           <Key>
@@ -40,7 +40,7 @@
           <Property Name="permission_id" Type="int" Nullable="false" />
           <Property Name="user_id" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="fk_tb_package_tb_user">
+        <Association Name="FK_tb_package_tb_user">
           <End Role="tb_user" Type="Self.tb_user" Multiplicity="1" />
           <End Role="tb_package" Type="Self.tb_package" Multiplicity="*" />
           <ReferentialConstraint>
@@ -48,11 +48,11 @@
               <PropertyRef Name="pk_id" />
             </Principal>
             <Dependent Role="tb_package">
-              <PropertyRef Name="owner_id" />
+              <PropertyRef Name="ower_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_tb_permission_has_tb_user_tb_permission1">
+        <Association Name="FK_tb_user_permission_tb_permission">
           <End Role="tb_permission" Type="Self.tb_permission" Multiplicity="1" />
           <End Role="tb_user_permission" Type="Self.tb_user_permission" Multiplicity="*" />
           <ReferentialConstraint>
@@ -64,7 +64,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_tb_permission_has_tb_user_tb_user1">
+        <Association Name="FK_tb_user_permission_tb_user">
           <End Role="tb_user" Type="Self.tb_user" Multiplicity="1" />
           <End Role="tb_user_permission" Type="Self.tb_user_permission" Multiplicity="*" />
           <ReferentialConstraint>
@@ -76,20 +76,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ModelsStoreContainer">
-          <EntitySet Name="tb_package" EntityType="Self.tb_package" Schema="mutrack_simple" store:Type="Tables" />
-          <EntitySet Name="tb_permission" EntityType="Self.tb_permission" Schema="mutrack_simple" store:Type="Tables" />
-          <EntitySet Name="tb_user" EntityType="Self.tb_user" Schema="mutrack_simple" store:Type="Tables" />
-          <EntitySet Name="tb_user_permission" EntityType="Self.tb_user_permission" Schema="mutrack_simple" store:Type="Tables" />
-          <AssociationSet Name="fk_tb_package_tb_user" Association="Self.fk_tb_package_tb_user">
+        <EntityContainer Name="MutrackSimpleModelStoreContainer">
+          <EntitySet Name="tb_package" EntityType="Self.tb_package" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_permission" EntityType="Self.tb_permission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_user" EntityType="Self.tb_user" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_user_permission" EntityType="Self.tb_user_permission" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tb_package_tb_user" Association="Self.FK_tb_package_tb_user">
             <End Role="tb_user" EntitySet="tb_user" />
             <End Role="tb_package" EntitySet="tb_package" />
           </AssociationSet>
-          <AssociationSet Name="fk_tb_permission_has_tb_user_tb_permission1" Association="Self.fk_tb_permission_has_tb_user_tb_permission1">
+          <AssociationSet Name="FK_tb_user_permission_tb_permission" Association="Self.FK_tb_user_permission_tb_permission">
             <End Role="tb_permission" EntitySet="tb_permission" />
             <End Role="tb_user_permission" EntitySet="tb_user_permission" />
           </AssociationSet>
-          <AssociationSet Name="fk_tb_permission_has_tb_user_tb_user1" Association="Self.fk_tb_permission_has_tb_user_tb_user1">
+          <AssociationSet Name="FK_tb_user_permission_tb_user" Association="Self.FK_tb_user_permission_tb_user">
             <End Role="tb_user" EntitySet="tb_user" />
             <End Role="tb_user_permission" EntitySet="tb_user_permission" />
           </AssociationSet>
@@ -98,59 +98,59 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="MutrackSimpleModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="PackageEntity">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="RegisterDate" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="OwnerId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.fk_tb_package_tb_user" FromRole="tb_package" ToRole="tb_user" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="60" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="RegisterDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="OwerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_tb_package_tb_user" FromRole="tb_package" ToRole="tb_user" />
         </EntityType>
         <EntityType Name="PermissionEntity">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Role" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Role" Type="String" MaxLength="45" FixedLength="true" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Users" Relationship="Self.tb_user_permission" FromRole="tb_permission" ToRole="tb_user" />
         </EntityType>
         <EntityType Name="UserEntity">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="120" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Packages" Relationship="Self.fk_tb_package_tb_user" FromRole="tb_user" ToRole="tb_package" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="120" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="128" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Packages" Relationship="Self.FK_tb_package_tb_user" FromRole="tb_user" ToRole="tb_package" />
           <NavigationProperty Name="Permissions" Relationship="Self.tb_user_permission" FromRole="tb_user" ToRole="tb_permission" />
         </EntityType>
-        <Association Name="fk_tb_package_tb_user">
-          <End Role="tb_user" Type="Models.UserEntity" Multiplicity="1" />
-          <End Role="tb_package" Type="Models.PackageEntity" Multiplicity="*" />
+        <Association Name="FK_tb_package_tb_user">
+          <End Role="tb_user" Type="MutrackSimpleModel.UserEntity" Multiplicity="1" />
+          <End Role="tb_package" Type="MutrackSimpleModel.PackageEntity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tb_user">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="tb_package">
-              <PropertyRef Name="OwnerId" />
+              <PropertyRef Name="OwerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="tb_user_permission">
-          <End Role="tb_permission" Type="Models.PermissionEntity" Multiplicity="*" />
-          <End Role="tb_user" Type="Models.UserEntity" Multiplicity="*" />
+          <End Role="tb_permission" Type="MutrackSimpleModel.PermissionEntity" Multiplicity="*" />
+          <End Role="tb_user" Type="MutrackSimpleModel.UserEntity" Multiplicity="*" />
         </Association>
         <EntityContainer Name="MutrackSimpleEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Packages" EntityType="Models.PackageEntity" />
-          <EntitySet Name="Permissions" EntityType="Models.PermissionEntity" />
-          <EntitySet Name="Users" EntityType="Models.UserEntity" />
-          <AssociationSet Name="fk_tb_package_tb_user" Association="Self.fk_tb_package_tb_user">
+          <EntitySet Name="Packages" EntityType="MutrackSimpleModel.PackageEntity" />
+          <EntitySet Name="Permissions" EntityType="MutrackSimpleModel.PermissionEntity" />
+          <EntitySet Name="Users" EntityType="MutrackSimpleModel.UserEntity" />
+          <AssociationSet Name="FK_tb_package_tb_user" Association="Self.FK_tb_package_tb_user">
             <End Role="tb_user" EntitySet="Users" />
             <End Role="tb_package" EntitySet="Packages" />
           </AssociationSet>
@@ -164,21 +164,21 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="MutrackSimpleEntities">
+        <EntityContainerMapping StorageEntityContainer="MutrackSimpleModelStoreContainer" CdmEntityContainer="MutrackSimpleEntities">
           <EntitySetMapping Name="Packages">
-            <EntityTypeMapping TypeName="Models.PackageEntity">
+            <EntityTypeMapping TypeName="MutrackSimpleModel.PackageEntity">
               <MappingFragment StoreEntitySet="tb_package">
                 <ScalarProperty Name="Id" ColumnName="pk_id" />
                 <ScalarProperty Name="Name" ColumnName="name" />
                 <ScalarProperty Name="Code" ColumnName="code" />
                 <ScalarProperty Name="Description" ColumnName="description" />
                 <ScalarProperty Name="RegisterDate" ColumnName="register_date" />
-                <ScalarProperty Name="OwnerId" ColumnName="owner_id" />
+                <ScalarProperty Name="OwerId" ColumnName="ower_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Permissions">
-            <EntityTypeMapping TypeName="Models.PermissionEntity">
+            <EntityTypeMapping TypeName="MutrackSimpleModel.PermissionEntity">
               <MappingFragment StoreEntitySet="tb_permission">
                 <ScalarProperty Name="Id" ColumnName="pk_id" />
                 <ScalarProperty Name="Role" ColumnName="role" />
@@ -186,7 +186,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="Models.UserEntity">
+            <EntityTypeMapping TypeName="MutrackSimpleModel.UserEntity">
               <MappingFragment StoreEntitySet="tb_user">
                 <ScalarProperty Name="Id" ColumnName="pk_id" />
                 <ScalarProperty Name="Name" ColumnName="name" />
@@ -195,7 +195,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="tb_user_permission" TypeName="Models.tb_user_permission" StoreEntitySet="tb_user_permission">
+          <AssociationSetMapping Name="tb_user_permission" TypeName="MutrackSimpleModel.tb_user_permission" StoreEntitySet="tb_user_permission">
             <EndProperty Name="tb_permission">
               <ScalarProperty Name="Id" ColumnName="permission_id" />
             </EndProperty>
@@ -217,9 +217,9 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

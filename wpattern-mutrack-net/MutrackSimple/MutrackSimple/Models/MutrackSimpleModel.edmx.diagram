@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1a5051946ce343aa8a32071ceae81e7a" Name="Diagram1">
-        <EntityTypeShape EntityType="Models.PackageEntity" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.PermissionEntity" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.UserEntity" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <AssociationConnector Association="Models.fk_tb_package_tb_user" ManuallyRouted="false" />
-        <AssociationConnector Association="Models.tb_user_permission" ManuallyRouted="false" />
+      <Diagram DiagramId="8c804b2c34d24d25ab9adb2a7f8e1da7" Name="Diagram1">
+        <EntityTypeShape EntityType="MutrackSimpleModel.PackageEntity" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MutrackSimpleModel.PermissionEntity" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MutrackSimpleModel.UserEntity" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="MutrackSimpleModel.FK_tb_package_tb_user" ManuallyRouted="false" />
+        <AssociationConnector Association="MutrackSimpleModel.tb_user_permission" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

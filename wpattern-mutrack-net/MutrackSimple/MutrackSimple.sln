@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MutrackSimple", "MutrackSimple\MutrackSimple.csproj", "{969CD8FF-DA9E-4AE5-9C28-2DE292BD8F75}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project Files", "Project Files", "{6F0E016B-BF2B-4778-981D-A92C8C0A423D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MutrackSimple.Test", "MutrackSimple.Test\MutrackSimple.Test.csproj", "{8A172EA4-5C70-425D-B540-F07031E4A5E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,6 +19,10 @@ Global
 		{969CD8FF-DA9E-4AE5-9C28-2DE292BD8F75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{969CD8FF-DA9E-4AE5-9C28-2DE292BD8F75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{969CD8FF-DA9E-4AE5-9C28-2DE292BD8F75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A172EA4-5C70-425D-B540-F07031E4A5E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A172EA4-5C70-425D-B540-F07031E4A5E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A172EA4-5C70-425D-B540-F07031E4A5E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A172EA4-5C70-425D-B540-F07031E4A5E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
