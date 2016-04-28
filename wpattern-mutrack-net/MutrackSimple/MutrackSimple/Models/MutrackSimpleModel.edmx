@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MutrackSimpleModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MutrackSimpleModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tb_package">
           <Key>
             <PropertyRef Name="pk_id" />
@@ -94,8 +94,7 @@
             <End Role="tb_user_permission" EntitySet="tb_user_permission" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MutrackSimpleModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -146,7 +145,7 @@
           <End Role="tb_permission" Type="MutrackSimpleModel.PermissionEntity" Multiplicity="*" />
           <End Role="tb_user" Type="MutrackSimpleModel.UserEntity" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="MutrackSimpleEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="MutrackSimpleEntities" annotation:LazyLoadingEnabled="false">
           <EntitySet Name="Packages" EntityType="MutrackSimpleModel.PackageEntity" />
           <EntitySet Name="Permissions" EntityType="MutrackSimpleModel.PermissionEntity" />
           <EntitySet Name="Users" EntityType="MutrackSimpleModel.UserEntity" />
