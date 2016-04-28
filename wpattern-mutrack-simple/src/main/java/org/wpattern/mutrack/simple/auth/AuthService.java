@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.wpattern.mutrack.simple.user.UserEntity;
 import org.wpattern.mutrack.simple.user.UserRepository;
 import org.wpattern.mutrack.simple.utils.ServiceMap;
-import org.wpattern.mutrack.simple.utils.ServiceNames;
+import org.wpattern.mutrack.simple.utils.ServicePath;
 
 @RestController
-@RequestMapping(ServiceNames.AUTH_PATH)
+@RequestMapping(ServicePath.AUTH_PATH)
 public class AuthService implements ServiceMap {
 
 	@Autowired

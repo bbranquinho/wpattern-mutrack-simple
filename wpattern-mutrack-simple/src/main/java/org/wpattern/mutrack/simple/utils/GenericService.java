@@ -28,11 +28,6 @@ public abstract class GenericService<T extends BaseEntity<ID>, ID extends Serial
 	public T insert(@RequestBody T entityObject) {
 		this.LOGGER.debug(String.format("Saving the entity [%s].", entityObject));
 
-		if (entityObject == null) {
-			this.LOGGER.error("Entity with null value.");
-			return null;
-		}
-
 		entityObject.setId(null);
 
 		return this.genericRepository.save(entityObject);

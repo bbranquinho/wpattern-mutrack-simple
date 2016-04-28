@@ -1,6 +1,6 @@
 package org.wpattern.mutrack.simple.utils;
 
-public final class ServiceNames {
+public final class ServicePath {
 
 	///////////////////////////////////////////////////////////////
 	// ROOT PATH

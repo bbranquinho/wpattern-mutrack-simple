@@ -9,8 +9,10 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.wpattern.mutrack.simple.packagee.PackageeEntity;
 import org.wpattern.mutrack.simple.permission.PermissionEntity;
 import org.wpattern.mutrack.simple.utils.BaseEntity;
 
@@ -32,6 +34,9 @@ public class UserEntity extends BaseEntity<Long> {
 
 	@Column(name = "password", length = 128, nullable = false)
 	private String password;
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+	private List<PackageeEntity> packagees;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tb_user_permission", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "permission_id") )

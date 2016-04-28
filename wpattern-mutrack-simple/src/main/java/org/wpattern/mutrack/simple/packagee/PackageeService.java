@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.wpattern.mutrack.simple.utils.GenericService;
-import org.wpattern.mutrack.simple.utils.ServiceNames;
+import org.wpattern.mutrack.simple.utils.ServicePath;
 
 @RestController
-@RequestMapping(path = ServiceNames.PACKAGEE_PATH)
+@RequestMapping(path = ServicePath.PACKAGEE_PATH)
 public class PackageeService extends GenericService<PackageeEntity, Long> {
 
 	@Override
