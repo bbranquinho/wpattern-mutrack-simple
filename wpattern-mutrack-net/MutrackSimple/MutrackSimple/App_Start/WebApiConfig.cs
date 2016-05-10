@@ -12,9 +12,8 @@ namespace MutrackSimple
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-            //var cors = new EnableCorsAttribute("*", "*", "*");
-
-            //config.EnableCors(cors);
+            var cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
 
             // Web API Config
             config.Formatters.Remove(config.Formatters.XmlFormatter);

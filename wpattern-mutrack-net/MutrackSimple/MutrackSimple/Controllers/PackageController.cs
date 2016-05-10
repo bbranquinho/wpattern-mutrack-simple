@@ -5,28 +5,38 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using MutrackSimple.Models;
+using MutrackSimple.Models.Repositories;
+using MutrackSimple.Models.Repositories.Impl;
 
 namespace MutrackSimple.Controllers
 {
+    //[EnableCors(origins: "*", headers: "*", methods: "*")]
     public class PackageController : ApiController
     {
-        private MutrackSimpleEntities db = new MutrackSimpleEntities();
+        private PackageRepository Repository { get; set; }
+
+        public PackageController()
+        {
+            var context = new MutrackSimpleEntities();
+
+            Repository = new PackageRepositoryImpl(context);
+        }
 
         // GET: api/Package
         public IQueryable<PackageEntity> GetPackages()
         {
-            return db.Packages;
+            return Repository.GetQuery();
         }
 
         // GET: api/Package/5
         [ResponseType(typeof(PackageEntity))]
         public IHttpActionResult GetPackageEntity(int id)
         {
-            PackageEntity packageEntity = db.Packages.Find(id);
+            PackageEntity packageEntity = Repository.Single(id);
+
             if (packageEntity == null)
             {
                 return NotFound();
@@ -35,29 +45,22 @@ namespace MutrackSimple.Controllers
             return Ok(packageEntity);
         }
 
-        // PUT: api/Package/5
+        // PUT: api/Package
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutPackageEntity(int id, PackageEntity packageEntity)
+        public IHttpActionResult PutPackageEntity(PackageEntity entity)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            if (id != packageEntity.Id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(packageEntity).State = EntityState.Modified;
-
+            
             try
             {
-                db.SaveChanges();
+                Repository.Update(entity);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PackageEntityExists(id))
+                if (!PackageEntityExists(entity.Pk))
                 {
                     return NotFound();
                 }
@@ -72,22 +75,20 @@ namespace MutrackSimple.Controllers
 
         // POST: api/Package
         [ResponseType(typeof(PackageEntity))]
-        public IHttpActionResult PostPackageEntity(PackageEntity packageEntity)
+        public IHttpActionResult PostPackageEntity(PackageEntity entity)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            db.Packages.Add(packageEntity);
-
+            
             try
             {
-                db.SaveChanges();
+                Repository.Add(entity);
             }
             catch (DbUpdateException)
             {
-                if (PackageEntityExists(packageEntity.Id))
+                if (PackageEntityExists(entity.Pk))
                 {
                     return Conflict();
                 }
@@ -97,37 +98,26 @@ namespace MutrackSimple.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = packageEntity.Id }, packageEntity);
+            return CreatedAtRoute("DefaultApi", new { id = entity.Pk }, entity);
         }
 
         // DELETE: api/Package/5
         [ResponseType(typeof(PackageEntity))]
         public IHttpActionResult DeletePackageEntity(int id)
         {
-            PackageEntity packageEntity = db.Packages.Find(id);
-            if (packageEntity == null)
+            try
+            {
+                return Ok(Repository.Delete(id));
+            }
+            catch (Exception)
             {
                 return NotFound();
             }
-
-            db.Packages.Remove(packageEntity);
-            db.SaveChanges();
-
-            return Ok(packageEntity);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
 
         private bool PackageEntityExists(int id)
         {
-            return db.Packages.Count(e => e.Id == id) > 0;
+            return Repository.Count(e => e.Id == id) > 0;
         }
     }
 }

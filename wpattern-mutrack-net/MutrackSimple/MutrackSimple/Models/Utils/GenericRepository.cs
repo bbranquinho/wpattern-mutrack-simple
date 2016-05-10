@@ -20,6 +20,7 @@ namespace MutrackSimple.Models.Utils
         void Delete(T entity);
         T Delete(PK pk);
         void Update(T entity);
+        int Count(Func<T, bool> where);
         int SaveChanges();
     }
 }

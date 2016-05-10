@@ -1,35 +1,19 @@
-﻿using MutrackSimple.Models;
+﻿using MutrackSimple.Controllers.Utils;
+using MutrackSimple.Models;
 using MutrackSimple.Models.Repositories;
 using MutrackSimple.Models.Repositories.Impl;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace MutrackSimple.Controllers
 {
-    public class UserController : ApiController
+    //[EnableCors(origins: "*", headers: "*", methods: "*")]
+    public class UserController : GenericControllerImpl<UserEntity, int>
     {
-        #region Properties
-        private UserRepository Repository { get; set; }
-        #endregion
-
         #region Constructors
-        public UserController()
+        public UserController() : base(new UserRepositoryImpl(new MutrackSimpleEntities()))
         {
-            var context = new MutrackSimpleEntities();
-            Repository = new UserRepositoryImpl(context);
-        }
-        #endregion
-
-        #region Service Methods
-        public List<UserEntity> Get()
-        {
-            var users = Repository.GetAll().ToList();
-
-            return users;
         }
         #endregion
     }

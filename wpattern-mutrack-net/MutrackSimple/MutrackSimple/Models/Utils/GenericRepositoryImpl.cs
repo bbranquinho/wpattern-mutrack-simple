@@ -9,7 +9,6 @@ using System.Web.Http.Cors;
 
 namespace MutrackSimple.Models.Utils
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public abstract class GenericRepositoryImpl<T, PK> : GenericRepository<T, PK> where T : BaseEntity<PK>
     {
         #region Properties
@@ -95,12 +94,16 @@ namespace MutrackSimple.Models.Utils
         public T Single(PK pk)
         {
             return Set.Find(pk);
-            Context.SaveChanges();
         }
 
         public T Single(Func<T, bool> where)
         {
             return Set.Single(where);
+        }
+
+        public int Count(Func<T, bool> where)
+        {
+            return Set.Count(where);
         }
 
         public void Update(T newEntity)
