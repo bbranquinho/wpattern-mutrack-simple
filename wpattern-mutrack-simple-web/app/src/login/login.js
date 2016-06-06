@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mutrack')
-  .controller('LoginCtrl', function($scope, $http, $rootScope, $location, ngNotify, SERVICE_PATH) {
+  .controller('LoginCtrl', function($scope, $http, $cookies, $rootScope, $location, ngNotify, SERVICE_PATH) {
     var url = SERVICE_PATH.PUBLIC_PATH + '/auth';
 
     $scope.login = function(email, password) {
@@ -20,6 +20,7 @@ angular.module('mutrack')
 
           if (data.name) {
             $rootScope.authDetails = { name: data.name, authenticated: data.authenticated, permissions: data.authorities };
+            $http.defaults.headers.common['X-XSRF-TOKEN'] = $cookies.get('XSRF-TOKEN');
             $location.path('/');
             ngNotify.set('Welcome ' + data.name + '.', 'success');
           } else {

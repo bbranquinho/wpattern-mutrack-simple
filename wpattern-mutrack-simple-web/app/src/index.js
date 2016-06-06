@@ -2,13 +2,13 @@
 
 var BASE_URL = 'http://localhost:8080/api';
 
-angular.module('mutrack', ['checklist-model', 'ngNotify', 'ngRoute'])
+angular.module('mutrack', ['checklist-model', 'ngNotify', 'ngRoute', 'ngCookies'])
   .constant('SERVICE_PATH', {
     'ROOT_PATH': BASE_URL,
     'PUBLIC_PATH': BASE_URL + '/public',
     'PRIVATE_PATH': BASE_URL + '/private'
   })
-  .config(function($routeProvider, $httpProvider) {
+  .config(function($routeProvider) {
     $routeProvider.
       when('/', {
         templateUrl: 'src/home/home.html',
@@ -29,14 +29,11 @@ angular.module('mutrack', ['checklist-model', 'ngNotify', 'ngRoute'])
       .otherwise({
         redirectTo: '/'
       });
-
-      $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-      $httpProvider.defaults.withCredentials = true;
-  }).
-  run(function($rootScope) {
-    $rootScope.authDetails = {
-      name: '',
-      authenticated: false,
-      permissions: []
-    };
+  })
+  .config(function($httpProvider) {
+    $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    $httpProvider.defaults.withCredentials = true;
+  })
+  .run(function($rootScope) {
+    $rootScope.authDetails = { name: '', authenticated: false, permissions: [] };
   });

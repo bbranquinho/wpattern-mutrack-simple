@@ -16,12 +16,15 @@ public class LoginDetailBean extends BaseBean implements UserDetails {
 
 	private final String name;
 
+	private final String email;
+
 	private final String password;
 
 	private final Set<String> roles;
 
-	public LoginDetailBean(String name, String passwordHash) {
+	public LoginDetailBean(String name, String email, String passwordHash) {
 		this.name = name;
+		this.email = email;
 		this.password = passwordHash;
 		this.roles = new HashSet<String>();
 	}
@@ -59,6 +62,10 @@ public class LoginDetailBean extends BaseBean implements UserDetails {
 	@Override
 	public String getUsername() {
 		return this.name;
+	}
+
+	public String getEmail() {
+		return email;
 	}
 
 	@Override
