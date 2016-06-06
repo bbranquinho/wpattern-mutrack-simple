@@ -6,12 +6,11 @@ angular.module('mutrack')
 
     $scope.login = function(email, password) {
       var requestParams = {
-        method: 'POST',
+        method: 'GET',
         url: url,
-        headers: { 'Content-Type': 'application/json' },
-        data: {
-          'email': email,
-          'password': password
+        headers: {
+          'Content-Type': 'application/json',
+          'authorization' : 'Basic ' + btoa(email + ':' + password)
         }
       };
 
@@ -20,34 +19,18 @@ angular.module('mutrack')
           var data = response.data;
 
           if (data.name) {
-            $rootScope.authDetails = {
-              name: data.name,
-              authenticated: true,
-              permissions: data.permissions
-            };
-
+            $rootScope.authDetails = { name: data.name, authenticated: data.authenticated, permissions: data.authorities };
             $location.path('/');
             ngNotify.set('Welcome ' + data.name + '.', 'success');
           } else {
-            $rootScope.authDetails = {
-              name: '',
-              authenticated: false,
-              permissions: []
-            };
-
-            ngNotify.set('The email or password that you have entered do not match our records.', {
-              type: 'failure',
-              duration: 5000
-            });
+            $rootScope.authDetails = { name: '', authenticated: false, permissions: [] };
+            ngNotify.set('Email or password that you have entered do not match our records.', { type: 'failure', duration: 5000 });
           }
         },
         function failure(response) {
-          $rootScope.authDetails = {
-            name: '',
-            authenticated: false,
-            permissions: []
-          };
+          $rootScope.authDetails = { name: '', authenticated: false, permissions: []};
         }
       );
     };
+
   });

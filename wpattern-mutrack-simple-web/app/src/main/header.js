@@ -7,8 +7,8 @@ angular.module('mutrack').
       var hasPermission = false;
 
       $rootScope.authDetails.permissions.forEach(function(permission) {
-        authorities.forEach(function(role) {
-          if (permission.role === role) {
+        authorities.forEach(function(authority) {
+          if (permission.authority === authority) {
             hasPermission = true;
           }
         });

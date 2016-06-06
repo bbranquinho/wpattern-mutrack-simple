@@ -8,7 +8,7 @@ angular.module('mutrack', ['checklist-model', 'ngNotify', 'ngRoute'])
     'PUBLIC_PATH': BASE_URL + '/public',
     'PRIVATE_PATH': BASE_URL + '/private'
   })
-  .config(function($routeProvider) {
+  .config(function($routeProvider, $httpProvider) {
     $routeProvider.
       when('/', {
         templateUrl: 'src/home/home.html',
@@ -29,6 +29,9 @@ angular.module('mutrack', ['checklist-model', 'ngNotify', 'ngRoute'])
       .otherwise({
         redirectTo: '/'
       });
+
+      $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+      $httpProvider.defaults.withCredentials = true;
   }).
   run(function($rootScope) {
     $rootScope.authDetails = {
