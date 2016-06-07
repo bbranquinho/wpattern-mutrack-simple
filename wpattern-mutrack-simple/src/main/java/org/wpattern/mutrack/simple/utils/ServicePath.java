@@ -28,6 +28,8 @@ public final class ServicePath {
 	// PUBLIC PATHS
 	///////////////////////////////////////////////////////////////
 
-	public static final String AUTH_PATH = PUBLIC_ROOT_PATH + "/auth";
+	public static final String LOGIN_PATH = PUBLIC_ROOT_PATH + "/login";
+
+	public static final String LOGOUT_PATH = PUBLIC_ROOT_PATH + "/logout";
 
 }

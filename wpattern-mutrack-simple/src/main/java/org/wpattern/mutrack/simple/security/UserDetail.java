@@ -1,4 +1,4 @@
-package org.wpattern.mutrack.simple.auth;
+package org.wpattern.mutrack.simple.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

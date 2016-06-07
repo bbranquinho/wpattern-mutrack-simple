@@ -1,7 +1,7 @@
 'user strict';
 
 angular.module('mutrack').
-  controller('headerSrv', function($scope, $rootScope, $location) {
+  controller('headerSrv', function($scope, $rootScope, $location, LoginLogoutSrv) {
 
     $scope.hasAnyPermission = function(authorities) {
       var hasPermission = false;
@@ -18,10 +18,7 @@ angular.module('mutrack').
     };
 
     $scope.logout = function() {
-      $rootScope.authDetails = {
-        authenticated: false,
-        permissions: []
-      };
+      LoginLogoutSrv.logout();
     };
 
   });

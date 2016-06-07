@@ -1,8 +1,8 @@
 <h1><a href="#">WPattern Mutrack Simple</a></h1>
 <nav class="links" ng-controller="headerSrv">
   <ul>
-    <li><a href="#/packagee">Packages</a></li>
-    <li><a href="#/user">Users</a></li>
+    <li ng-show="hasAnyPermission(['ROLE_ADMIN', 'ROLE_USER'])"><a href="#/packagee">Packages</a></li>
+    <li ng-show="hasAnyPermission(['ROLE_ADMIN'])"><a href="#/user">Users</a></li>
     <li ng-show="!authDetails.authenticated"><a href="#/login">Login</a></li>
     <li ng-show="authDetails.authenticated"><a href="#/" ng-click="logout()">Logout</a></li>
   </ul>

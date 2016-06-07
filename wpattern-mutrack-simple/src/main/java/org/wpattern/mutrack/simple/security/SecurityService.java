@@ -1,4 +1,4 @@
-package org.wpattern.mutrack.simple.auth;
+package org.wpattern.mutrack.simple.security;
 
 import java.security.Principal;
 
@@ -9,7 +9,7 @@ import org.wpattern.mutrack.simple.utils.ServiceMap;
 import org.wpattern.mutrack.simple.utils.ServicePath;
 
 @RestController
-@RequestMapping(ServicePath.AUTH_PATH)
+@RequestMapping(ServicePath.LOGIN_PATH)
 public class SecurityService implements ServiceMap {
 
 	@RequestMapping(method = { RequestMethod.GET })

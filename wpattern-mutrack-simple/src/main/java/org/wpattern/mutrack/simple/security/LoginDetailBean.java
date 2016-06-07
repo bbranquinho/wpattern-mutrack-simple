@@ -1,4 +1,4 @@
-package org.wpattern.mutrack.simple.auth;
+package org.wpattern.mutrack.simple.security;
 
 import java.util.Collection;
 import java.util.Collections;

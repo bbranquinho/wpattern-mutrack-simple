@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.wpattern.mutrack.simple.auth.CurrentUser;
+import org.wpattern.mutrack.simple.exception.SecurityException;
+import org.wpattern.mutrack.simple.security.CurrentUser;
 import org.wpattern.mutrack.simple.user.UserEntity;
 import org.wpattern.mutrack.simple.user.UserRepository;
 import org.wpattern.mutrack.simple.utils.GenericService;
@@ -35,21 +36,36 @@ public class PackageeService extends GenericService<PackageeEntity, Long> {
 
 	@Override
 	public PackageeEntity insert(@RequestBody PackageeEntity packagee) {
-		setDetails(packagee);
+		packagee.setUser(this.userRepository.findByEmail(currentUser.getActiveUser().getEmail()));
+		packagee.setRegisterDate(new Date());
+
 		return super.insert(packagee);
 	}
 
 	@Override
 	public void update(PackageeEntity packagee) {
-		setDetails(packagee);
+		validateUserRequest(packagee);
+
+		packagee.setRegisterDate(new Date());
+
 		super.update(packagee);
 	}
 
-	private void setDetails(PackageeEntity packagee) {
+	@Override
+	public void delete(PackageeEntity packagee) {
+		validateUserRequest(packagee);
+
+		super.delete(packagee);
+	}
+
+	private UserEntity validateUserRequest(PackageeEntity packagee) {
 		UserEntity user = this.userRepository.findByEmail(currentUser.getActiveUser().getEmail());
 
-		packagee.setUser(user);
-		packagee.setRegisterDate(new Date());
+		if (packagee.getUser().getEmail().compareToIgnoreCase(user.getEmail()) != 0) {
+			throw new SecurityException();
+		}
+
+		return user;
 	}
 
 }
