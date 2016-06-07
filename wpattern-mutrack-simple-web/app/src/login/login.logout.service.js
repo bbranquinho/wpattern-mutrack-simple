@@ -46,9 +46,11 @@ angular.module('mutrack')
 
       $http(requestParams).finally(function success(response) {
           $rootScope.authDetails = { name: '', authenticated: false, permissions: [] };
-          delete $cookies['XSRF-TOKEN'];
-          delete $cookies['JSESSIONID'];
+
           $location.path("/");
+
+          $cookies.remove('XSRF-TOKEN');
+          $cookies.remove('JSESSIONID');
         });
     };
 
