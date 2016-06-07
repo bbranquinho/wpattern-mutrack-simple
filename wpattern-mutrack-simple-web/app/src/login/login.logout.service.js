@@ -44,21 +44,12 @@ angular.module('mutrack')
         }
       };
 
-      $http(requestParams).then(
-        function success(response) {
+      $http(requestParams).finally(function success(response) {
           $rootScope.authDetails = { name: '', authenticated: false, permissions: [] };
+          delete $cookies['XSRF-TOKEN'];
+          delete $cookies['JSESSIONID'];
           $location.path("/");
-        },
-
-        function failure() {
-          $rootScope.authDetails = { name: '', authenticated: false, permissions: [] };
-          $location.path("/");
-        }
-      );
-      //.finally(function() {
-      //  $rootScope.authDetails = { name: '', authenticated: false, permissions: [] };
-      //	$location.path("/");
-      //});
+        });
     };
 
     return serviceFactory;

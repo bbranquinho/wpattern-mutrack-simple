@@ -43,7 +43,7 @@ public class PackageeService extends GenericService<PackageeEntity, Long> {
 	}
 
 	@Override
-	public void update(PackageeEntity packagee) {
+	public void update(@RequestBody PackageeEntity packagee) {
 		validateUserRequest(packagee);
 
 		packagee.setRegisterDate(new Date());
@@ -52,7 +52,7 @@ public class PackageeService extends GenericService<PackageeEntity, Long> {
 	}
 
 	@Override
-	public void delete(PackageeEntity packagee) {
+	public void delete(@RequestBody PackageeEntity packagee) {
 		validateUserRequest(packagee);
 
 		super.delete(packagee);
