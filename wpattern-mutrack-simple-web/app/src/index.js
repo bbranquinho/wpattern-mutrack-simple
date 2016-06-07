@@ -1,6 +1,6 @@
 'use strict';
 
-var BASE_URL = 'http://localhost:8080/api';
+var BASE_URL = 'http://localhost:33999/api';
 
 angular.module('mutrack', ['checklist-model', 'ngNotify', 'ngRoute', 'ngCookies'])
   .constant('SERVICE_PATH', {

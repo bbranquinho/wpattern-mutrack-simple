@@ -7,9 +7,9 @@ using System.Web;
 
 namespace MutrackSimple.Models.Repositories.Impl
 {
-    public class PackageRepositoryImpl : GenericRepositoryImpl<PackageEntity, int>, PackageRepository
+    public class PackageeRepositoryImpl : GenericRepositoryImpl<PackageEntity, int>, PackageRepository
     {
-        public PackageRepositoryImpl(DbContext context) : base(context)
+        public PackageeRepositoryImpl(DbContext context) : base(context)
         {
         }
     }

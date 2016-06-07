@@ -2,7 +2,9 @@
 using MutrackSimple.Models.Utils;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -13,8 +15,6 @@ namespace MutrackSimple.Controllers.Utils
     {
         #region Properties
         protected GenericRepository<T, PK> Repository { get; set; }
-
-        private Type asdd = typeof(PackageEntity);
         #endregion
 
         #region Constructors
@@ -42,6 +42,79 @@ namespace MutrackSimple.Controllers.Utils
             }
 
             return Ok(entity);
+        }
+
+        // PUT: api/{Entity}
+        [ResponseType(typeof(void))]
+        public IHttpActionResult Put(T entity)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                Repository.Update(entity);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!EntityExists(entity.Pk))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        // POST: api/{Entity}
+        public IHttpActionResult Post(T entity)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                Repository.Add(entity);
+            }
+            catch (DbUpdateException)
+            {
+                if (EntityExists(entity.Pk))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtRoute("DefaultApi", new { id = entity.Pk }, entity);
+        }
+
+        // DELETE: api/{entity}/5
+        public IHttpActionResult Delete(PK pk)
+        {
+            try
+            {
+                return Ok(Repository.Delete(pk));
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
+        private bool EntityExists(PK pk)
+        {
+            return Repository.Count(e => e.Pk.Equals(pk)) > 0;
         }
         #endregion
     }

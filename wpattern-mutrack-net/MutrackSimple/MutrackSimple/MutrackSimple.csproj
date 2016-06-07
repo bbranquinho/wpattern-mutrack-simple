@@ -154,6 +154,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\PackageController.cs" />
+    <Compile Include="Controllers\PermissionController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\Utils\GenericController.cs" />
     <Compile Include="Controllers\Utils\GenericControllerImpl.cs" />

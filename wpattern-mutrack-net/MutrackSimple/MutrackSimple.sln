@@ -8,10 +8,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project Files", "Project Files", "{6F0E016B-BF2B-4778-981D-A92C8C0A423D}"
 	ProjectSection(SolutionItems) = preProject
 		Project Files\create_database.sql = Project Files\create_database.sql
-<<<<<<< HEAD
-=======
+		Project Files\index.html = Project Files\index.html
+		Project Files\index.js = Project Files\index.js
 		Project Files\mutrack_simple.bak = Project Files\mutrack_simple.bak
->>>>>>> 313248558773509f423f402d3fa0524dca2858c8
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MutrackSimple.Test", "MutrackSimple.Test\MutrackSimple.Test.csproj", "{8A172EA4-5C70-425D-B540-F07031E4A5E7}"
