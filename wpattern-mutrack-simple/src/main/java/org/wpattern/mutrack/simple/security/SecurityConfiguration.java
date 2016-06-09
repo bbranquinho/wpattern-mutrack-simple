@@ -67,7 +67,9 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 		// Permission Authorities.
 		.antMatchers(HttpMethod.GET, ServicePath.PERMISSION_PATH).hasAnyAuthority(AUTH_ADMIN)
 		.anyRequest().fullyAuthenticated().and()
-		.logout().logoutRequestMatcher(new AntPathRequestMatcher(ServicePath.LOGOUT_PATH)).and()
+		// Logout configuration.
+		.logout().logoutRequestMatcher(new AntPathRequestMatcher(ServicePath.LOGOUT_PATH))
+		.logoutSuccessHandler(new LogoutHandler()).and()
 		// CSRF configuration.
 		.csrf().csrfTokenRepository(csrfTokenRepository()).and()
 		.addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);

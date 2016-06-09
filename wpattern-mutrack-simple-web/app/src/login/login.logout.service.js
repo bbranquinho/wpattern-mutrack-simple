@@ -31,6 +31,7 @@ angular.module('mutrack')
         },
         function failure(response) {
           $rootScope.authDetails = { name: '', authenticated: false, permissions: []};
+          ngNotify.set('Email or password that you have entered do not match our records.', { type: 'failure', duration: 5000 });
         }
       );
     };
@@ -46,11 +47,7 @@ angular.module('mutrack')
 
       $http(requestParams).finally(function success(response) {
           $rootScope.authDetails = { name: '', authenticated: false, permissions: [] };
-
           $location.path("/");
-
-          $cookies.remove('XSRF-TOKEN');
-          $cookies.remove('JSESSIONID');
         });
     };
 
