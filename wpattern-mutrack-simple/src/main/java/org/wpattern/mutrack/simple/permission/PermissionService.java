@@ -11,9 +11,4 @@ import org.wpattern.mutrack.simple.utils.ServicePath;
 @RequestMapping(path = ServicePath.PERMISSION_PATH)
 public class PermissionService extends GenericService<PermissionEntity, Long> {
 
-	@Override
-	public List<PermissionEntity> findAll() {
-		return super.findAll();
-	}
-
 }

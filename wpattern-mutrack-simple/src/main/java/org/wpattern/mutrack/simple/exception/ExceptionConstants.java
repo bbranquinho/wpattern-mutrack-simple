@@ -1,15 +1,17 @@
 package org.wpattern.mutrack.simple.exception;
 
+import org.springframework.http.HttpStatus;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public enum ExceptionConstants {
 
-	PARAMETER_VALUE_EXCEPTION(400, 4001, "Invalid parameter value [%s]."),
+	PARAMETER_VALUE_EXCEPTION(HttpStatus.BAD_REQUEST, 4001, "Invalid parameter value."),
 
-	SECURITY_EXCEPTION(500, 5000, "Error thrown by security issues, find an administrator.");
+	SECURITY_EXCEPTION(HttpStatus.INTERNAL_SERVER_ERROR, 5000, "Error thrown by security issues, find an administrator.");
 
-	private final Integer httpCode;
+	private final HttpStatus httpStatus;
 
 	private final Integer serverCode;
 
@@ -25,8 +27,8 @@ public enum ExceptionConstants {
 		}
 	}
 
-	private ExceptionConstants(Integer httpCode, Integer serverCode, String message) {
-		this.httpCode = serverCode;
+	private ExceptionConstants(HttpStatus httpStatus, Integer serverCode, String message) {
+		this.httpStatus = httpStatus;
 		this.serverCode = serverCode;
 		this.message = message;
 	}
@@ -35,8 +37,8 @@ public enum ExceptionConstants {
 		return serverCode;
 	}
 
-	public Integer getHttpCode() {
-		return httpCode;
+	public HttpStatus getHttpStatus() {
+		return httpStatus;
 	}
 
 	public String getMessage() {

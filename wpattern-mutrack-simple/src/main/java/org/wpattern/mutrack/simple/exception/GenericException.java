@@ -3,46 +3,41 @@ package org.wpattern.mutrack.simple.exception;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.http.HttpStatus;
 
 public abstract class GenericException extends RuntimeException {
 
 	private static final long serialVersionUID = 201606062328L;
 
-	private final String message;
+	private final ExceptionBean exceptionBean;
 
-	private final Integer serverCode;
-
-	private final Integer httpCode;
-
-	private final String[] params;
+	private final HttpStatus httpStatus;
 
 	public GenericException(ExceptionConstants exp, String... params) {
-		this(exp.getMessage(), exp.getServerCode(), exp.getHttpCode(), params);
+		this(exp.getMessage(), exp.getServerCode(), exp.getHttpStatus(), params);
 	}
 
-	public GenericException(String message, Integer serverCode, Integer httpCode, String... params) {
+	public GenericException(String message, Integer serverCode, HttpStatus httpStatus, String... params) {
 		super();
-		this.message = message;
-		this.httpCode = httpCode;
-		this.serverCode = serverCode;
-		this.params = params;
+		this.httpStatus = httpStatus;
+		this.exceptionBean = new ExceptionBean(message, serverCode, params);
 	}
 
 	@Override
 	public String getMessage() {
-		return message;
+		return this.exceptionBean.getMessage();
 	}
 
-	public Integer getHttpCode() {
-		return httpCode;
+	public HttpStatus getHttpStatus() {
+		return httpStatus;
 	}
 
 	public Integer getServerCode() {
-		return serverCode;
+		return this.exceptionBean.getServerCode();
 	}
 
 	public String[] getParams() {
-		return params;
+		return this.exceptionBean.getParams();
 	}
 
 	@Override
