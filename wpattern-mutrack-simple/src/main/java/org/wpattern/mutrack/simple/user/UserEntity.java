@@ -11,7 +11,11 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Email;
 import org.wpattern.mutrack.simple.packagee.PackageeEntity;
 import org.wpattern.mutrack.simple.permission.PermissionEntity;
 import org.wpattern.mutrack.simple.utils.BaseEntity;
@@ -26,13 +30,20 @@ public class UserEntity extends BaseEntity<Long> {
 
 	private static final long serialVersionUID = 201602010251L;
 
+	@NotNull
+	@Size(min = 4, max = 120)
 	@Column(name = "name", length = 120, nullable = false)
 	private String name;
 
+	@Email
+	@NotNull
+    @Max(255)
 	@Column(name = "email", length = 255, nullable = false, unique = true)
 	private String email;
 
-	@Column(name = "password", length = 128, nullable = false)
+	@NotNull
+	@Size(min = 80, max = 80)
+	@Column(name = "password", length = 80, nullable = false)
 	private String password;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")

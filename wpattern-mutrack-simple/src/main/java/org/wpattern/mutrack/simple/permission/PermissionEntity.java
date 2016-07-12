@@ -4,6 +4,9 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.wpattern.mutrack.simple.utils.BaseEntity;
 
@@ -14,7 +17,9 @@ public class PermissionEntity extends BaseEntity<Long> {
 
 	private static final long serialVersionUID = 201602010401L;
 
-	@Column(name = "role")
+	@Max(45)
+	@NotNull
+	@Column(name = "role", length = 45, nullable = false, unique = true)
 	private String role;
 
 	public PermissionEntity() {

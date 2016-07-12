@@ -10,6 +10,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.wpattern.mutrack.simple.user.UserEntity;
 import org.wpattern.mutrack.simple.utils.BaseEntity;
@@ -21,19 +24,26 @@ public class PackageeEntity extends BaseEntity<Long> {
 
 	private static final long serialVersionUID = 201505091506L;
 
+	@NotNull
+	@Size(min = 4, max = 60)
 	@Column(name = "name", length = 60, nullable = false)
 	private String name;
 
+	@Max(20)
+	@NotNull
 	@Column(name = "code", length = 20, nullable = false)
 	private String code;
 
+	@Max(150)
 	@Column(name = "description", length = 150, nullable = true)
 	private String description;
 
+	@NotNull
 	@Column(name = "register_date", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date registerDate;
 
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "owner_id")
 	private UserEntity user;
