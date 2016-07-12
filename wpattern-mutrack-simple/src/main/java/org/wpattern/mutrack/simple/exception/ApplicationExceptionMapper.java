@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
+import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -12,13 +13,21 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.util.function.Consumer;
+
+import static org.wpattern.mutrack.simple.exception.ExceptionConstants.PARAMETER_VALUE_EXCEPTION;
+
 @ControllerAdvice
 @Component
 public class ApplicationExceptionMapper extends ResponseEntityExceptionHandler {
 
+    private static final Logger LOGGER = Logger.getLogger(ApplicationExceptionMapper.class);
+
     @ResponseBody
     @ExceptionHandler(SecurityException.class)
     public ResponseEntity<ExceptionBean> handleControllerException(SecurityException exception) {
+        LOGGER.error(exception.getMessage(), exception);
+
         return new ResponseEntity<ExceptionBean>(new ExceptionBean(exception), exception.getHttpStatus());
     }
 
@@ -36,9 +45,9 @@ public class ApplicationExceptionMapper extends ResponseEntityExceptionHandler {
 
         exceptionBean.setParams(params);
         exceptionBean.setMessage(exception.getConstraintViolations().toString());
-        exceptionBean.setServerCode(ExceptionConstants.PARAMETER_VALUE_EXCEPTION.getServerCode());
+        exceptionBean.setServerCode(PARAMETER_VALUE_EXCEPTION.getServerCode());
 
-        return new ResponseEntity<ExceptionBean>(exceptionBean, ExceptionConstants.PARAMETER_VALUE_EXCEPTION.getHttpStatus());
+        return new ResponseEntity<ExceptionBean>(exceptionBean, PARAMETER_VALUE_EXCEPTION.getHttpStatus());
     }
 
 }

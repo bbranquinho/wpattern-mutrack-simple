@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.wpattern.mutrack.simple.exception.ServerException;
 
 public abstract class GenericService<T extends BaseEntity<ID>, ID extends Serializable> implements ServiceMap {
 
@@ -19,16 +20,18 @@ public abstract class GenericService<T extends BaseEntity<ID>, ID extends Serial
 
 	@RequestMapping(method = RequestMethod.GET)
 	public List<T> findAll() {
-		this.LOGGER.debug("Requesting all records.");
+		if (this.LOGGER.isDebugEnabled()) {
+			this.LOGGER.debug("Requesting all records.");
+		}
 
 		return this.genericRepository.findAll();
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public T insert(@RequestBody T entityObject) {
-		this.LOGGER.debug(String.format("Saving the entity [%s].", entityObject));
-
-		entityObject.setId(null);
+		if (this.LOGGER.isDebugEnabled()) {
+			this.LOGGER.debug(String.format("Saving the entity [%s].", entityObject));
+		}
 
 		return this.genericRepository.save(entityObject);
 	}
@@ -37,14 +40,10 @@ public abstract class GenericService<T extends BaseEntity<ID>, ID extends Serial
 	public void update(@RequestBody T entityObject) {
 		this.LOGGER.debug(String.format("Request to update the record [%s].", entityObject));
 
-		if (entityObject == null) {
-			this.LOGGER.error("Entity can not be null.");
-			return;
-		}
-
 		if (entityObject.getId() == null) {
-			this.LOGGER.error("ID can not be null.");
-			return;
+			String errorMessage = String.format("ID of entity [%s] cannot be null.", entityObject.getClass());
+			this.LOGGER.error(errorMessage);
+			throw new ServerException(errorMessage);
 		}
 
 		this.genericRepository.save(entityObject);

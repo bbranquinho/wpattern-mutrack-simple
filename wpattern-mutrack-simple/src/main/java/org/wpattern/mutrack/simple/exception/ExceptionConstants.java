@@ -9,7 +9,9 @@ public enum ExceptionConstants {
 
 	PARAMETER_VALUE_EXCEPTION(HttpStatus.BAD_REQUEST, 4001, "Invalid parameter value."),
 
-	SECURITY_EXCEPTION(HttpStatus.INTERNAL_SERVER_ERROR, 5000, "Error thrown by security issues, find an administrator.");
+	SECURITY_EXCEPTION(HttpStatus.INTERNAL_SERVER_ERROR, 5000, "Error thrown by security issues, find an administrator."),
+
+	SERVER_EXCEPTION(HttpStatus.INTERNAL_SERVER_ERROR, 5001, "Server error, find an administrator. [%s]");
 
 	private final HttpStatus httpStatus;
 

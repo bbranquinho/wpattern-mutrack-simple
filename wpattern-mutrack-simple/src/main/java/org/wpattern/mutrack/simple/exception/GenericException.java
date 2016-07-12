@@ -23,6 +23,10 @@ public abstract class GenericException extends RuntimeException {
 		this.exceptionBean = new ExceptionBean(message, serverCode, params);
 	}
 
+	public ExceptionBean getExceptionBean() {
+		return exceptionBean;
+	}
+
 	@Override
 	public String getMessage() {
 		return this.exceptionBean.getMessage();
