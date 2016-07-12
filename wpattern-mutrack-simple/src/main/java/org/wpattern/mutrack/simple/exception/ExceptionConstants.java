@@ -5,29 +5,38 @@ import java.util.Map;
 
 public enum ExceptionConstants {
 
-	SECURITY_EXCEPTION(5000, "Error thrown by security issues, find an administrator.");
+	PARAMETER_VALUE_EXCEPTION(400, 4001, "Invalid parameter value [%s]."),
 
-	private final Integer code;
+	SECURITY_EXCEPTION(500, 5000, "Error thrown by security issues, find an administrator.");
+
+	private final Integer httpCode;
+
+	private final Integer serverCode;
 
 	private final String message;
 
-	private static final Map<Integer, ExceptionConstants> map;
+	private static final Map<Integer, ExceptionConstants> internalCodeMap;
 
 	static {
-		map = new HashMap<Integer, ExceptionConstants>();
+		internalCodeMap = new HashMap<Integer, ExceptionConstants>();
 
 		for (ExceptionConstants value : values()) {
-			map.put(value.code, value);
+			internalCodeMap.put(value.serverCode, value);
 		}
 	}
 
-	private ExceptionConstants(Integer code, String message) {
-		this.code = code;
+	private ExceptionConstants(Integer httpCode, Integer serverCode, String message) {
+		this.httpCode = serverCode;
+		this.serverCode = serverCode;
 		this.message = message;
 	}
 
-	public Integer getCode() {
-		return code;
+	public Integer getServerCode() {
+		return serverCode;
+	}
+
+	public Integer getHttpCode() {
+		return httpCode;
 	}
 
 	public String getMessage() {
@@ -35,7 +44,7 @@ public enum ExceptionConstants {
 	}
 
 	public ExceptionConstants parser(int code) {
-		return map.get(code);
+		return internalCodeMap.get(code);
 	}
 
 }

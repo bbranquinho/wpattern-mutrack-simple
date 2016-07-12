@@ -26,6 +26,7 @@ public class ApplicationExceptionMapper extends ResponseEntityExceptionHandler {
 		//		} else {
 		//			return new ResponseEntity<Object>(errorResponse,HttpStatus.INTERNAL_SERVER_ERROR);
 		//		}
+		
 		return null;
 	}
 

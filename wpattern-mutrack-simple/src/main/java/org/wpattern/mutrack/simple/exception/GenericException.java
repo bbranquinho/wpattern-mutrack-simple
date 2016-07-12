@@ -8,23 +8,23 @@ public abstract class GenericException extends RuntimeException {
 
 	private static final long serialVersionUID = 201606062328L;
 
-	private String message;
+	private final String message;
 
-	private Integer code;
+	private final Integer serverCode;
 
-	private String[] params;
+	private final Integer httpCode;
 
-	public GenericException() {
-	}
+	private final String[] params;
 
 	public GenericException(ExceptionConstants exp, String... params) {
-		this(exp.getMessage(), exp.getCode(), params);
+		this(exp.getMessage(), exp.getServerCode(), exp.getHttpCode(), params);
 	}
 
-	public GenericException(String message, Integer code, String... params) {
+	public GenericException(String message, Integer serverCode, Integer httpCode, String... params) {
 		super();
 		this.message = message;
-		this.code = code;
+		this.httpCode = httpCode;
+		this.serverCode = serverCode;
 		this.params = params;
 	}
 
@@ -33,24 +33,16 @@ public abstract class GenericException extends RuntimeException {
 		return message;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public Integer getHttpCode() {
+		return httpCode;
 	}
 
-	public Integer getCode() {
-		return code;
-	}
-
-	public void setCode(Integer code) {
-		this.code = code;
+	public Integer getServerCode() {
+		return serverCode;
 	}
 
 	public String[] getParams() {
 		return params;
-	}
-
-	public void setParams(String[] params) {
-		this.params = params;
 	}
 
 	@Override

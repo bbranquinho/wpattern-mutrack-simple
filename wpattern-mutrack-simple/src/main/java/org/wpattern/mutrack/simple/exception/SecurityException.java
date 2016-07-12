@@ -8,12 +8,4 @@ public class SecurityException extends GenericException {
 		super(ExceptionConstants.SECURITY_EXCEPTION);
 	}
 
-	public SecurityException(ExceptionConstants exp, String... params) {
-		super(exp, params);
-	}
-
-	public SecurityException(String message, Integer code, String... params) {
-		super(message, code, params);
-	}
-
 }
