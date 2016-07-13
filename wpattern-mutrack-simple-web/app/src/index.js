@@ -35,6 +35,10 @@ angular.module('mutrack', ['checklist-model', 'ngNotify', 'ngRoute', 'ngCookies'
     $httpProvider.defaults.withCredentials = true;
     $httpProvider.interceptors.push('httpRequestInterceptor');
   })
-  .run(function($rootScope) {
+  .run(function($rootScope, ngNotify) {
     $rootScope.authDetails = { name: '', authenticated: false, permissions: [] };
+
+    ngNotify.config({
+      theme: 'pastel'
+    });
   });

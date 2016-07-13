@@ -6,10 +6,6 @@ angular.module('mutrack')
     $scope.packagees = [];
     $scope.showAddEditPackagee = false;
 
-    ngNotify.config({
-      theme: 'pastel'
-    });
-
     // Show the form used to edit or add packagees.
     $scope.show = function() {
       $scope.showAddEditPackagee = true;

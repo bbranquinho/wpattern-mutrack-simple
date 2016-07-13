@@ -7,10 +7,6 @@ angular.module('mutrack')
     $scope.permissions = [];
     $scope.showAddEditUser = false;
 
-    ngNotify.config({
-      theme: 'pastel'
-    });
-
     // Show the form used to edit or add users.
     $scope.show = function() {
       $scope.showAddEditUser = true;

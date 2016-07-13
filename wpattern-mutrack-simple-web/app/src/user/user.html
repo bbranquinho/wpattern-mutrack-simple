@@ -6,17 +6,17 @@
   <form ng-submit="saveUser(user)" ng-hide="!showAddEditUser">
     <div>
       <label>Name</label>
-      <input type="text" placeholder="Name" ng-model="user.name" min="4" max="120" required>
+      <input type="text" placeholder="Name" ng-model="user.name" minlength="4" maxlength="120" required>
     </div>
 
     <div>
       <label>Email</label>
-      <input type="email" placeholder="Email" ng-model="user.email" max="255" required>
+      <input type="email" placeholder="Email" ng-model="user.email" maxlength="255" required>
     </div>
 
     <div>
       <label>Password</label>
-      <input type="password" placeholder="Password" ng-model="user.password" min="6" max="30" required>
+      <input type="password" placeholder="Password" ng-model="user.password" minlength="6" maxlength="30" required>
     </div>
 
     <div>

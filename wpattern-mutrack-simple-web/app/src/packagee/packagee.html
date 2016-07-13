@@ -6,17 +6,17 @@
   <form ng-submit="savePackagee(packagee)" ng-hide="!showAddEditPackagee">
     <div>
       <label>Name</label>
-      <input type="text" placeholder="Name" ng-model="packagee.name" min="4" max="60" required>
+      <input type="text" placeholder="Name" ng-model="packagee.name" minlength="4" maxlength="60" required>
     </div>
 
     <div>
       <label>Code</label>
-      <input type="text" placeholder="Code" ng-model="packagee.code" max="20" required>
+      <input type="text" placeholder="Code" ng-model="packagee.code" maxlength="20" required>
     </div>
 
     <div>
       <label>Description</label>
-      <input type="text" placeholder="Description" ng-model="packagee.description" max="150">
+      <input type="text" placeholder="Description" ng-model="packagee.description" maxlength="150">
     </div>
 
     <button type="submit">Save</button>
