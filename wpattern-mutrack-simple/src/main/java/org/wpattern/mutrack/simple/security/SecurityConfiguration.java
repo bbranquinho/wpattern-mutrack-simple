@@ -19,6 +19,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
@@ -41,6 +42,9 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private HeaderHandler headerHandler;
 
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -68,11 +72,11 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 		.antMatchers(HttpMethod.GET, ServicePath.PERMISSION_PATH).hasAnyAuthority(AUTH_ADMIN)
 		.anyRequest().fullyAuthenticated().and()
 		// Logout configuration.
-		.logout().logoutRequestMatcher(new AntPathRequestMatcher(ServicePath.LOGOUT_PATH))
-		.logoutSuccessHandler(new LogoutHandler()).and()
+		.logout().logoutRequestMatcher(new AntPathRequestMatcher(ServicePath.LOGOUT_PATH)).logoutSuccessHandler(headerHandler).and()
 		// CSRF configuration.
 		.csrf().csrfTokenRepository(csrfTokenRepository()).and()
-		.addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);
+		.addFilterAfter(csrfHeaderFilter(), CsrfFilter.class)
+        .addFilterAfter(headerHandler, ChannelProcessingFilter.class);
 	}
 
 	private CsrfTokenRepository csrfTokenRepository() {

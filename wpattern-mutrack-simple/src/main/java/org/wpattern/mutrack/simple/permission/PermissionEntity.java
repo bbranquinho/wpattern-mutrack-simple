@@ -8,6 +8,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.wpattern.mutrack.simple.utils.BaseEntity;
 
 @Entity
@@ -17,8 +18,9 @@ public class PermissionEntity extends BaseEntity<Long> {
 
 	private static final long serialVersionUID = 201602010401L;
 
-	@Max(45)
 	@NotNull
+	@NotEmpty
+	@Size(max = 45)
 	@Column(name = "role", length = 45, nullable = false, unique = true)
 	private String role;
 

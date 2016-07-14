@@ -14,6 +14,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.wpattern.mutrack.simple.user.UserEntity;
 import org.wpattern.mutrack.simple.utils.BaseEntity;
 
@@ -29,12 +30,13 @@ public class PackageeEntity extends BaseEntity<Long> {
 	@Column(name = "name", length = 60, nullable = false)
 	private String name;
 
-	@Max(20)
 	@NotNull
+	@NotEmpty
+	@Size(max = 20)
 	@Column(name = "code", length = 20, nullable = false)
 	private String code;
 
-	@Max(150)
+	@Size(max = 150)
 	@Column(name = "description", length = 150, nullable = true)
 	private String description;
 
@@ -45,7 +47,7 @@ public class PackageeEntity extends BaseEntity<Long> {
 
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "owner_id")
+	@JoinColumn(name = "owner_id", nullable = false)
 	private UserEntity user;
 
 	public PackageeEntity() {

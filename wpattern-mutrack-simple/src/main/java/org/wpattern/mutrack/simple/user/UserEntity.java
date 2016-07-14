@@ -16,6 +16,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.wpattern.mutrack.simple.packagee.PackageeEntity;
 import org.wpattern.mutrack.simple.permission.PermissionEntity;
 import org.wpattern.mutrack.simple.utils.BaseEntity;
@@ -37,7 +38,7 @@ public class UserEntity extends BaseEntity<Long> {
 
 	@Email
 	@NotNull
-    @Max(255)
+	@NotEmpty
 	@Column(name = "email", length = 255, nullable = false, unique = true)
 	private String email;
 

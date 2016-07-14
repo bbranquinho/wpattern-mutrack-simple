@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mutrack')
-  .service('LoginLogoutSrv', function($http, $cookies, $rootScope, $location, ngNotify, SERVICE_PATH) {
+  .service('LoginLogoutSrv', function($http, $cookies, $rootScope, $location, $localStorage, ngNotify, SERVICE_PATH) {
     var serviceFactory = {};
     var urlLogin  = SERVICE_PATH.PUBLIC_PATH + '/login';
     var urlLogout = SERVICE_PATH.PUBLIC_PATH + '/logout';
@@ -22,6 +22,7 @@ angular.module('mutrack')
 
           if (data.name) {
             $rootScope.authDetails = { name: data.name, authenticated: data.authenticated, permissions: data.authorities };
+            $localStorage.authDetails = $rootScope.authDetails;
             $location.path('/');
             ngNotify.set('Welcome ' + data.name + '.', 'success');
           } else {
@@ -40,15 +41,20 @@ angular.module('mutrack')
       var requestParams = {
         method: 'POST',
         url: urlLogout,
-        headers: {
-          'Content-Type': 'application/json'
-        }
+        headers: { 'Content-Type': 'application/json' }
       };
 
       $http(requestParams).finally(function success(response) {
-          $rootScope.authDetails = { name: '', authenticated: false, permissions: [] };
-          $location.path("/");
-        });
+        delete $localStorage.authDetails;
+        $rootScope.authDetails = { name: '', authenticated: false, permissions: [] };
+        $location.path("/");
+      });
+    };
+
+    serviceFactory.verifyAuth = function() {
+      if ($localStorage.authDetails) {
+        $rootScope.authDetails = $localStorage.authDetails;
+      }
     };
 
     return serviceFactory;

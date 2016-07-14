@@ -2,7 +2,7 @@
 
 var BASE_URL = 'http://localhost:8080/api';
 
-angular.module('mutrack', ['checklist-model', 'ngNotify', 'ngRoute', 'ngCookies'])
+angular.module('mutrack', ['checklist-model', 'ngNotify', 'ngRoute', 'ngCookies', 'ngStorage'])
   .constant('SERVICE_PATH', {
     'ROOT_PATH': BASE_URL,
     'PUBLIC_PATH': BASE_URL + '/public',
@@ -35,10 +35,12 @@ angular.module('mutrack', ['checklist-model', 'ngNotify', 'ngRoute', 'ngCookies'
     $httpProvider.defaults.withCredentials = true;
     $httpProvider.interceptors.push('httpRequestInterceptor');
   })
-  .run(function($rootScope, ngNotify) {
+  .run(function($rootScope, ngNotify, LoginLogoutSrv) {
     $rootScope.authDetails = { name: '', authenticated: false, permissions: [] };
 
     ngNotify.config({
       theme: 'pastel'
     });
+
+    LoginLogoutSrv.verifyAuth();
   });
