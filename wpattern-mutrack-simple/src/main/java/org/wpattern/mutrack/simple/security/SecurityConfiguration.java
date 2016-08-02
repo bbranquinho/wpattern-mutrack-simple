@@ -43,8 +43,8 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private HeaderHandler headerHandler;
+	@Autowired
+	private HeaderHandler headerHandler;
 
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -76,7 +76,7 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 		// CSRF configuration.
 		.csrf().csrfTokenRepository(csrfTokenRepository()).and()
 		.addFilterAfter(csrfHeaderFilter(), CsrfFilter.class)
-        .addFilterAfter(headerHandler, ChannelProcessingFilter.class);
+		.addFilterAfter(headerHandler, ChannelProcessingFilter.class);
 	}
 
 	private CsrfTokenRepository csrfTokenRepository() {
