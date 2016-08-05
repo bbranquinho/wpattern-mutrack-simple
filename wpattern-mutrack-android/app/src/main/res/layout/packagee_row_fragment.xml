@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF9F9F9"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/codePackageRow"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Name"
+                android:id="@+id/namePackageRow"
+                android:layout_alignParentTop="true"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:layout_marginBottom="2dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text=" ("
+                android:id="@+id/textView" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Code"
+                android:id="@+id/codePackageRow"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:layout_alignBottom="@+id/namePackageRow"
+                android:layout_toRightOf="@+id/namePackageRow"
+                android:layout_toEndOf="@+id/namePackageRow" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text=")"
+                android:id="@+id/textView2" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Description"
+            android:id="@+id/descriptionPackageRow"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:layout_alignRight="@+id/codePackageRow"
+            android:layout_alignEnd="@+id/codePackageRow" />
+
+    </LinearLayout>
+
+</RelativeLayout>
