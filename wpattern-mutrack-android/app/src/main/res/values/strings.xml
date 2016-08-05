@@ -2,5 +2,4 @@
     <string name="app_name">Mutrack Simple</string>
     <string name="action_settings">Settings</string>
     <string name="package_label">Packages</string>
-    <string name="new_package">New Package</string>
 </resources>
