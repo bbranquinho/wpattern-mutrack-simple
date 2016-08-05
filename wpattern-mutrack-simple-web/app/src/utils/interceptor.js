@@ -9,17 +9,11 @@ angular.module('mutrack')
       return config;
     },
 
-    responseError: function(rejection) {
-      //if (canRecover(rejection)) {
-      //  return responseOrNewPromise
-      //}
-      var asd = ';';
-
-      if (rejection.status === 401) {
-        console.log('a');
-      }
-
-      return $q.reject(rejection);
-    }
+    // responseError: function(rejection) {
+    //   if (rejection.status === 401) {
+    //   }
+    //
+    //   return $q.reject(rejection);
+    // }
   };
 });
