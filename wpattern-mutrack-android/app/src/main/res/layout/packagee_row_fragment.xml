@@ -20,42 +20,62 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/buttonDelete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Name"
-                android:id="@+id/namePackageRow"
-                android:layout_alignParentTop="true"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:layout_marginBottom="2dp" />
+                android:layout_gravity="bottom|end"
+                android:layout_margin="@dimen/fab_margin"
+                android:src="@android:drawable/ic_dialog_email" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text=" ("
-                android:id="@+id/textView" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Code"
-                android:id="@+id/codePackageRow"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:layout_alignBottom="@+id/namePackageRow"
-                android:layout_toRightOf="@+id/namePackageRow"
-                android:layout_toEndOf="@+id/namePackageRow" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Name"
+                    android:id="@+id/namePackageRow"
+                    android:layout_alignParentTop="true"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:layout_marginBottom="2dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text=")"
-                android:id="@+id/textView2" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text=" ("
+                        android:id="@+id/textView" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Code"
+                        android:id="@+id/codePackageRow"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:layout_alignBottom="@+id/namePackageRow"
+                        android:layout_toRightOf="@+id/namePackageRow"
+                        android:layout_toEndOf="@+id/namePackageRow" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text=")"
+                        android:id="@+id/textView2" />
+                </LinearLayout>
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -26,7 +26,7 @@ public class PackageeListFragment extends ListFragment {
 
         ArrayList<PackageeBean> packagees = new ArrayList<>();
 
-        packagees.add(new PackageeBean("Package 1", "BR12341ASD", "Gradle build finished in 3s 580ms"));
+        packagees.add(new PackageeBean("Package 1 asdf asdf asdfa asdf adf", "BR12341ASD", "Gradle build finished in 3s 580ms"));
         packagees.add(new PackageeBean("Package 2", "CN13444DDF", "Executing tasks: [:app:assembleDebug]"));
         packagees.add(new PackageeBean("Package 3", "XP123663DF", "Arduino"));
         packagees.add(new PackageeBean("Package 4", "FD234566DF", "org.wpattern.mutrack.simple D/Atlas: Validating map"));
@@ -51,13 +51,13 @@ public class PackageeListFragment extends ListFragment {
 
         getListView().setDivider(ContextCompat.getDrawable(getActivity(), android.R.color.black));
         getListView().setDividerHeight(2);
+
+
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-
-
     }
 
 }
