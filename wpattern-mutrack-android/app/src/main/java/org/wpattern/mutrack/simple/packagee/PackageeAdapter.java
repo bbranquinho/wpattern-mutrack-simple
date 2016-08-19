@@ -9,9 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
 import org.wpattern.mutrack.simple.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PackageeAdapter extends ArrayAdapter<PackageeBean> {
 
@@ -40,6 +43,18 @@ public class PackageeAdapter extends ArrayAdapter<PackageeBean> {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String url = "http://localhost:8080/api/private/packagee";
+
+                // Create a new RestTemplate instance
+                RestTemplate restTemplate = new RestTemplate();
+
+                // Add the String message converter
+                //restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+
+                // Make the HTTP GET request, marshaling the response to a String
+                Object[] result = restTemplate.getForObject(url, Object[].class, "Android");
+
+
                 Snackbar.make(view, "Deleted the package \"" + packagee.getName() + "\"", Snackbar.LENGTH_LONG)
                         .setAction("Code", new View.OnClickListener() {
                             @Override
