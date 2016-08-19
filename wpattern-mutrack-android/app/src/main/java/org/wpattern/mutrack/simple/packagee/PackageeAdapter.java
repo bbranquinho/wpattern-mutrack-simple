@@ -3,18 +3,17 @@ package org.wpattern.mutrack.simple.packagee;
 import android.content.Context;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 import org.wpattern.mutrack.simple.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class PackageeAdapter extends ArrayAdapter<PackageeBean> {
 
@@ -52,7 +51,15 @@ public class PackageeAdapter extends ArrayAdapter<PackageeBean> {
                 //restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
 
                 // Make the HTTP GET request, marshaling the response to a String
-                Object[] result = restTemplate.getForObject(url, Object[].class, "Android");
+                try {
+                    //Object[] result = restTemplate.getForObject(url, Object[].class, "Android");
+                    PackageeRest packageeRest = new PackageeRest();
+
+                    packageeRest.execute(url);
+
+                } catch (Exception ex) {
+                    Log.e(ex.getMessage(), "");
+                }
 
 
                 Snackbar.make(view, "Deleted the package \"" + packagee.getName() + "\"", Snackbar.LENGTH_LONG)

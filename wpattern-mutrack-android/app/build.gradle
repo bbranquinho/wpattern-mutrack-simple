@@ -19,7 +19,7 @@ android {
     }
     packagingOptions {
         exclude 'META-INF/license.txt'
-        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
     }
 }
 
@@ -36,5 +36,5 @@ dependencies {
     compile 'com.android.support:design:24.1.1'
     compile 'com.android.support:support-v4:24.1.1'
     compile 'org.springframework.android:spring-android-rest-template:2.0.0.M3'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.8.1'
 }

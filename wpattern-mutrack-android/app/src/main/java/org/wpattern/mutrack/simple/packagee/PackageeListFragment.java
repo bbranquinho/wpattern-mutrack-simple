@@ -22,8 +22,6 @@ public class PackageeListFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        String[] values = new String[] { "Android", "Windows 10", "Mac OS X" };
-
         ArrayList<PackageeBean> packagees = new ArrayList<>();
 
         packagees.add(new PackageeBean("Package 1 asdf asdf asdfa asdf adf", "BR12341ASD", "Gradle build finished in 3s 580ms"));
@@ -51,8 +49,6 @@ public class PackageeListFragment extends ListFragment {
 
         getListView().setDivider(ContextCompat.getDrawable(getActivity(), android.R.color.black));
         getListView().setDividerHeight(2);
-
-
     }
 
     @Override
