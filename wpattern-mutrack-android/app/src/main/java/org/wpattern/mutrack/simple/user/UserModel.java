@@ -1,14 +1,23 @@
 package org.wpattern.mutrack.simple.user;
 
-public class UserBean {
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 
+@Table(name = "Users")
+public class UserModel extends Model {
+
+    @Column(name = "Name")
     private String name;
 
+    @Column(name = "Email", unique = true)
     private String email;
 
+    @Column(name = "Password")
     private String password;
 
-    public UserBean() {
+    public UserModel() {
+        super();
     }
 
     public String getName() {

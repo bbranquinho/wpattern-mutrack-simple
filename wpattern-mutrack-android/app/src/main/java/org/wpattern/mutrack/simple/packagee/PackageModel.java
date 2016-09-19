@@ -1,31 +1,44 @@
 package org.wpattern.mutrack.simple.packagee;
 
-import org.wpattern.mutrack.simple.user.UserBean;
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
+
+import org.wpattern.mutrack.simple.user.UserModel;
 
 import java.util.Date;
 
-public class PackageeBean {
+@Table(name = "Packages")
+public class PackageModel extends Model {
 
+    @Column(name = "Name")
     private String name;
 
+    @Column(name = "Code")
     private String code;
 
+    @Column(name = "Description")
     private String description;
 
+    @Column(name = "RegisterDate")
     private Date registerDate;
 
-    private UserBean user;
+    @Column(name = "User")
+    private UserModel user;
 
-    public PackageeBean() {
+    public PackageModel() {
+        super();
     }
 
-    public PackageeBean(String name, String code, String description) {
+    public PackageModel(String name, String code, String description) {
+        super();
         this.name = name;
         this.code = code;
         this.description = description;
     }
 
-    public PackageeBean(String name, String code, String description, Date registerDate, UserBean user) {
+    public PackageModel(String name, String code, String description, Date registerDate, UserModel user) {
+        super();
         this.name = name;
         this.code = code;
         this.description = description;
@@ -61,11 +74,11 @@ public class PackageeBean {
         this.registerDate = registerDate;
     }
 
-    public UserBean getUser() {
+    public UserModel getUser() {
         return user;
     }
 
-    public void setUser(UserBean user) {
+    public void setUser(UserModel user) {
         this.user = user;
     }
 

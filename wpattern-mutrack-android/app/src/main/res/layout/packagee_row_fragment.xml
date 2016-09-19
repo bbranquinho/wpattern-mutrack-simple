@@ -85,9 +85,7 @@
             android:text="Description"
             android:id="@+id/descriptionPackageRow"
             android:ellipsize="end"
-            android:singleLine="true"
-            android:layout_alignRight="@+id/codePackageRow"
-            android:layout_alignEnd="@+id/codePackageRow" />
+            android:singleLine="true"/>
 
     </LinearLayout>
 

@@ -3,16 +3,9 @@ package org.wpattern.mutrack.simple.packagee;
 
 import android.app.ListFragment;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-
-import org.wpattern.mutrack.simple.R;
 
 import java.util.ArrayList;
 
@@ -22,25 +15,25 @@ public class PackageeListFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ArrayList<PackageeBean> packagees = new ArrayList<>();
+        ArrayList<PackageModel> packagees = new ArrayList<>();
 
-        packagees.add(new PackageeBean("Package 1 asdf asdf asdfa asdf adf", "BR12341ASD", "Gradle build finished in 3s 580ms"));
-        packagees.add(new PackageeBean("Package 2", "CN13444DDF", "Executing tasks: [:app:assembleDebug]"));
-        packagees.add(new PackageeBean("Package 3", "XP123663DF", "Arduino"));
-        packagees.add(new PackageeBean("Package 4", "FD234566DF", "org.wpattern.mutrack.simple D/Atlas: Validating map"));
-        packagees.add(new PackageeBean("Package 5", "FD234566DF", "org.wpattern.mutrack.simple D/Atlas: Validating map"));
-        packagees.add(new PackageeBean("Package 6", "FD234566DF", "org.wpattern.mutrack.simple D/Atlas: Validating map"));
-        packagees.add(new PackageeBean("Package 7", "FD234566DF", "org.wpattern.mutrack.simple D/Atlas: Validating map"));
-        packagees.add(new PackageeBean("Package 8", "FD234566DF", "org.wpattern.mutrack.simple D/Atlas: Validating map"));
-        packagees.add(new PackageeBean("Package 9", "FD234566DF", "org.wpattern.mutrack.simple D/Atlas: Validating map"));
-        packagees.add(new PackageeBean("Package 10", "FD234566DF", "org.wpattern.mutrack.simple D/Atlas: Validating map"));
-        packagees.add(new PackageeBean("Package 11", "FD234566DF", "org.wpattern.mutrack.simple D/Atlas: Validating map"));
-        packagees.add(new PackageeBean("Package 12", "FD234566DF", "org.wpattern.mutrack.simple D/Atlas: Validating map"));
-        packagees.add(new PackageeBean("Package 13", "FD234566DF", "org.wpattern.mutrack.simple D/Atlas: Validating map"));
-        packagees.add(new PackageeBean("Package 14", "FD234566DF", "org.wpattern.mutrack.simple D/Atlas: Validating map"));
-        packagees.add(new PackageeBean("Package 15", "FD234566DF", "org.wpattern.mutrack.simple D/Atlas: Validating map"));
-        packagees.add(new PackageeBean("Package 16", "FD234566DF", "org.wpattern.mutrack.simple D/Atlas: Validating map"));
-        packagees.add(new PackageeBean("Package 17", "FD234566DF", "org.wpattern.mutrack.simple D/Atlas: Validating map"));
+        packagees.add(new PackageModel("Package 1 asdf asdf asdfa asdf adf", "BR12341ASD", "Gradle build finished in 3s 580ms"));
+        packagees.add(new PackageModel("Package 2", "CN13444DDF", "Executing tasks: [:app:assembleDebug]"));
+        packagees.add(new PackageModel("Package 3", "XP123663DF", "Arduino"));
+        packagees.add(new PackageModel("Package 4", "FD234566DF", "org.wpattern.mutrack.simple D/Atlas: Validating map"));
+        packagees.add(new PackageModel("Package 5", "FD234566DF", "org.wpattern.mutrack.simple D/Atlas: Validating map"));
+        packagees.add(new PackageModel("Package 6", "FD234566DF", "org.wpattern.mutrack.simple D/Atlas: Validating map"));
+        packagees.add(new PackageModel("Package 7", "FD234566DF", "org.wpattern.mutrack.simple D/Atlas: Validating map"));
+        packagees.add(new PackageModel("Package 8", "FD234566DF", "org.wpattern.mutrack.simple D/Atlas: Validating map"));
+        packagees.add(new PackageModel("Package 9", "FD234566DF", "org.wpattern.mutrack.simple D/Atlas: Validating map"));
+        packagees.add(new PackageModel("Package 10", "FD234566DF", "org.wpattern.mutrack.simple D/Atlas: Validating map"));
+        packagees.add(new PackageModel("Package 11", "FD234566DF", "org.wpattern.mutrack.simple D/Atlas: Validating map"));
+        packagees.add(new PackageModel("Package 12", "FD234566DF", "org.wpattern.mutrack.simple D/Atlas: Validating map"));
+        packagees.add(new PackageModel("Package 13", "FD234566DF", "org.wpattern.mutrack.simple D/Atlas: Validating map"));
+        packagees.add(new PackageModel("Package 14", "FD234566DF", "org.wpattern.mutrack.simple D/Atlas: Validating map"));
+        packagees.add(new PackageModel("Package 15", "FD234566DF", "org.wpattern.mutrack.simple D/Atlas: Validating map"));
+        packagees.add(new PackageModel("Package 16", "FD234566DF", "org.wpattern.mutrack.simple D/Atlas: Validating map"));
+        packagees.add(new PackageModel("Package 17", "FD234566DF", "org.wpattern.mutrack.simple D/Atlas: Validating map"));
 
 
         PackageeAdapter adapter = new PackageeAdapter(getActivity(), packagees);

@@ -24,9 +24,8 @@ android {
 }
 
 repositories {
-    maven {
-        url 'https://repo.spring.io/libs-milestone'
-    }
+    maven { url 'https://repo.spring.io/libs-milestone' }
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
 }
 
 dependencies {
@@ -37,4 +36,5 @@ dependencies {
     compile 'com.android.support:support-v4:24.1.1'
     compile 'org.springframework.android:spring-android-rest-template:2.0.0.M3'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.8.1'
+    compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
 }
