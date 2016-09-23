@@ -9,7 +9,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.Cache;
@@ -59,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onResume() {
+        getWindow().getDecorView().findViewById(android.R.id.content).invalidate();
+
         super.onResume();
     }
 
@@ -68,9 +73,9 @@ public class MainActivity extends AppCompatActivity {
         newPackageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, NewPackageActivity.class);
+            Intent intent = new Intent(MainActivity.this, NewPackageActivity.class);
 
-                startActivity(intent);
+            startActivity(intent);
             }
         });
     }

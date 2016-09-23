@@ -43,6 +43,8 @@ public class NewPackageActivity extends AppCompatActivity {
                 packagee.setDescription(descriptionText.getText().toString());
 
                 packagee.save();
+
+                NewPackageActivity.this.finish();
             }
         });
     }

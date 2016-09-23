@@ -19,7 +19,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:id="@+id/linearLayoutMain">
 
         <TextView
             android:layout_width="wrap_content"

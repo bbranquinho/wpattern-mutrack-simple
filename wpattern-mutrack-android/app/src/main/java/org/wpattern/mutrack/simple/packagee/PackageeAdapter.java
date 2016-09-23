@@ -48,6 +48,8 @@ public class PackageeAdapter extends ArrayAdapter<PackageModel> {
             public void onClick(View view) {
                 Snackbar.make(view, "Deleted the package \"" + packagee.getName() + "\"", Snackbar.LENGTH_LONG)
                         .setAction("Code", codeListener).show();
+
+                packagee.delete();
             }
         };
 
@@ -56,4 +58,5 @@ public class PackageeAdapter extends ArrayAdapter<PackageModel> {
 
         return convertView;
     }
+
 }
