@@ -3,10 +3,10 @@ package org.wpattern.mutrack.simple.packagee;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
-
-import org.wpattern.mutrack.simple.user.UserModel;
+import com.activeandroid.query.Select;
 
 import java.util.Date;
+import java.util.List;
 
 @Table(name = "Packages")
 public class PackageModel extends Model {
@@ -23,9 +23,6 @@ public class PackageModel extends Model {
     @Column(name = "RegisterDate")
     private Date registerDate;
 
-    @Column(name = "User")
-    private UserModel user;
-
     public PackageModel() {
         super();
     }
@@ -35,15 +32,6 @@ public class PackageModel extends Model {
         this.name = name;
         this.code = code;
         this.description = description;
-    }
-
-    public PackageModel(String name, String code, String description, Date registerDate, UserModel user) {
-        super();
-        this.name = name;
-        this.code = code;
-        this.description = description;
-        this.registerDate = registerDate;
-        this.user = user;
     }
 
     public String getName() {
@@ -74,16 +62,12 @@ public class PackageModel extends Model {
         this.registerDate = registerDate;
     }
 
-    public UserModel getUser() {
-        return user;
-    }
-
-    public void setUser(UserModel user) {
-        this.user = user;
-    }
-
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<PackageModel> findAll() {
+        return new Select().from(PackageModel.class).execute();
     }
 
 }

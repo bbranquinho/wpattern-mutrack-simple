@@ -2,5 +2,6 @@
     <string name="app_name">Mutrack Simple</string>
     <string name="action_refresh">Refresh</string>
     <string name="package_label">Packages</string>
+    <string name="package_new">New Package</string>
     <string name="root_url_rest">http://10.1.1.8:8080/api</string>
 </resources>

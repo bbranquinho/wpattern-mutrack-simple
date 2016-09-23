@@ -12,10 +12,11 @@ import android.widget.TextView;
 import org.wpattern.mutrack.simple.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PackageeAdapter extends ArrayAdapter<PackageModel> {
 
-    public PackageeAdapter(Context context, ArrayList<PackageModel> packagees) {
+    public PackageeAdapter(Context context, List<PackageModel> packagees) {
         super(context, 0, packagees);
     }
 
@@ -35,22 +36,23 @@ public class PackageeAdapter extends ArrayAdapter<PackageModel> {
         codeTextView.setText(packagee.getCode());
         descriptionTextView.setText(packagee.getDescription());
 
-        FloatingActionButton fab = (FloatingActionButton)convertView.findViewById(R.id.buttonDelete);
-
-        fab.setOnClickListener(new View.OnClickListener() {
+        final View.OnClickListener codeListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                (new PackageeRest()).execute();
-
-                Snackbar.make(view, "Deleted the package \"" + packagee.getName() + "\"", Snackbar.LENGTH_LONG)
-                        .setAction("Code", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                Snackbar.make(view, "Code: " + packagee.getCode(), Snackbar.LENGTH_LONG).show();
-                            }
-                        }).show();
+                Snackbar.make(view, "Code: " + packagee.getCode(), Snackbar.LENGTH_LONG).show();
             }
-        });
+        };
+
+        View.OnClickListener fabListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Deleted the package \"" + packagee.getName() + "\"", Snackbar.LENGTH_LONG)
+                        .setAction("Code", codeListener).show();
+            }
+        };
+
+        FloatingActionButton fab = (FloatingActionButton)convertView.findViewById(R.id.buttonDelete);
+        fab.setOnClickListener(fabListener);
 
         return convertView;
     }

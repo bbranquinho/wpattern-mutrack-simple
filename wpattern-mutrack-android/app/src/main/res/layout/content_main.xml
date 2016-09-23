@@ -28,6 +28,12 @@
             android:text="@string/package_label"
             android:id="@+id/packageLabel" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/package_new"
+            android:id="@+id/buttonNewPackage" />
+
         <fragment
             android:id="@+id/packageListFragment"
             android:name="org.wpattern.mutrack.simple.packagee.PackageeListFragment"
