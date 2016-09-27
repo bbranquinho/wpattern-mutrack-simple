@@ -50,6 +50,15 @@ public class PackageeAdapter extends ArrayAdapter<PackageModel> {
                         .setAction("Code", codeListener).show();
 
                 packagee.delete();
+
+                PackageeAdapter.this.clear();
+                List<PackageModel> packages = packagee.findAll();
+
+                for (int i = 0; i < packages.size(); i++) {
+                    PackageeAdapter.this.insert(packages.get(i), i);
+                }
+
+                PackageeAdapter.this.notifyDataSetChanged();
             }
         };
 

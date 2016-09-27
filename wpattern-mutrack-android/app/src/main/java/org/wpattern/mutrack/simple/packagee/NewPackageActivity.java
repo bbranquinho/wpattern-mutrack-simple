@@ -10,11 +10,24 @@ import org.wpattern.mutrack.simple.R;
 
 public class NewPackageActivity extends AppCompatActivity {
 
+    private PackageModel packagee;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_package);
         setActions();
+
+        packagee = (PackageModel) getIntent().getSerializableExtra("package");
+
+        if (packagee == null) {
+            packagee = new PackageModel();
+        } else {
+            packagee = packagee.findById();
+            ((EditText) NewPackageActivity.this.findViewById(R.id.namePackage)).setText(packagee.getName());
+            ((EditText) NewPackageActivity.this.findViewById(R.id.codePackage)).setText(packagee.getCode());
+            ((EditText) NewPackageActivity.this.findViewById(R.id.descriptionPackage)).setText(packagee.getDescription());
+        }
     }
 
     private void setActions() {
@@ -35,8 +48,6 @@ public class NewPackageActivity extends AppCompatActivity {
                 EditText nameText = (EditText) NewPackageActivity.this.findViewById(R.id.namePackage);
                 EditText codeText = (EditText) NewPackageActivity.this.findViewById(R.id.codePackage);
                 EditText descriptionText = (EditText) NewPackageActivity.this.findViewById(R.id.descriptionPackage);
-
-                PackageModel packagee = new PackageModel();
 
                 packagee.setName(nameText.getText().toString());
                 packagee.setCode(codeText.getText().toString());

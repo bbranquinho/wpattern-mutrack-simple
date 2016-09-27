@@ -5,11 +5,14 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Table(name = "Packages")
-public class PackageModel extends Model {
+public class PackageModel extends Model implements Serializable {
+
+    private Long myId;
 
     @Column(name = "Name")
     private String name;
@@ -32,6 +35,13 @@ public class PackageModel extends Model {
         this.name = name;
         this.code = code;
         this.description = description;
+    }
+
+    public PackageModel findById() {
+        return new Select()
+                .from(PackageModel.class)
+                .where("id = ?", myId)
+                .executeSingle();
     }
 
     public String getName() {
@@ -68,6 +78,14 @@ public class PackageModel extends Model {
 
     public List<PackageModel> findAll() {
         return new Select().from(PackageModel.class).execute();
+    }
+
+    public Long getMyId() {
+        return myId;
+    }
+
+    public void setMyId() {
+        this.myId = getId();
     }
 
 }
