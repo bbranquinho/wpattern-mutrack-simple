@@ -20,11 +20,21 @@ public class ApplicationExceptionMapper extends ResponseEntityExceptionHandler {
 	private static final Logger LOGGER = Logger.getLogger(ApplicationExceptionMapper.class);
 
 	@ResponseBody
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<ExceptionBean> handleControllerException(Exception exception) {
+		LOGGER.error(exception.getMessage(), exception);
+
+		ServerException exceptionBean = new ServerException(exception.getMessage());
+
+		return new ResponseEntity<>(new ExceptionBean(exceptionBean ), exceptionBean.getHttpStatus());
+	}
+
+	@ResponseBody
 	@ExceptionHandler(SecurityException.class)
 	public ResponseEntity<ExceptionBean> handleControllerException(SecurityException exception) {
 		LOGGER.error(exception.getMessage(), exception);
 
-		return new ResponseEntity<ExceptionBean>(new ExceptionBean(exception), exception.getHttpStatus());
+		return new ResponseEntity<>(new ExceptionBean(exception), exception.getHttpStatus());
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -44,7 +54,7 @@ public class ApplicationExceptionMapper extends ResponseEntityExceptionHandler {
 		exceptionBean.setMessage(exception.getConstraintViolations().toString());
 		exceptionBean.setServerCode(PARAMETER_VALUE_EXCEPTION.getServerCode());
 
-		return new ResponseEntity<ExceptionBean>(exceptionBean, PARAMETER_VALUE_EXCEPTION.getHttpStatus());
+		return new ResponseEntity<>(exceptionBean, PARAMETER_VALUE_EXCEPTION.getHttpStatus());
 	}
 
 }
