@@ -1,6 +1,7 @@
 package org.wpattern.mutrack.simple.packagee;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,12 +27,12 @@ public class PackageeService extends GenericService<PackageeEntity, Long> {
 	@Autowired
 	private PackageeRepository packageRepository;
 
-	//	@Override
-	//	public List<PackageeEntity> findAll() {
-	//		UserEntity user = this.userRepository.findByEmail(currentUser.getActiveUser().getEmail());
-	//
-	//		return this.packageRepository.findByUser(user);
-	//	}
+	@Override
+	public List<PackageeEntity> findAll() {
+		UserEntity user = this.userRepository.findByEmail(currentUser.getActiveUser().getEmail());
+
+		return this.packageRepository.findByUser(user);
+	}
 
 	@Override
 	public PackageeEntity insert(@RequestBody PackageeEntity packagee) {
