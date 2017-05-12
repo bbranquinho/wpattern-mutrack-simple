@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="index">
+  <head>
+    <meta charset="utf-8">
+    <title>AngularJS - CORS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script>
+      var url = 'http://localhost:8080/service/private/user';
+
+      angular.module('index', [])
+        .controller('indexCtrl', function($scope, $http) {
+          $scope.users = {};
+
+          //$scope.users = [ { 'id':1, 'name':'User 1' } , { 'id':2, 'name':'User 2' }];
+          $http.get(url).then(function(data) {
+            $scope.users = data.data;
+          });
+        });
+    </script>
+  </head>
+  <body ng-controller="indexCtrl">
+    <table border="1">
+      <thead>
+        <tr>
+          <td>ID</td>
+          <td>Nome</td>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr ng-repeat="user in users">
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
